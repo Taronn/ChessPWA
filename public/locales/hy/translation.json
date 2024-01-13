@@ -1,0 +1,30 @@
+{
+    "Common":{
+        "Username": "Մուտքանուն",
+        "Password": "Գաղտնաբառ",
+        "Email": "Էլ. հասցե",
+        "SignIn": "Մուտք",
+        "SignUp": "Գրանցվել"
+    },
+   
+    "SignIn": {
+        "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",
+        "PasswordPlaceholder": "Մուտքագրեք ձեր գաղտնաբառը",
+        "ForgotPassword": "Մոռացել եք գաղտնաբառը",
+        "DontHaveAccount": "Չունե՞ք հաշիվ"
+    },
+    "SignUp": {
+        "UsernamePlaceholder": "միայն փոքրատառեր, թվեր, _, և .",
+        "PasswordPlaceholder": "մինիմում 8 նիշ, մեծատառ, փոքրատառ, թիվ",
+        "ConfirmPassword": "Հաստատեք գաղտնաբառը",
+        "RepeatPassword": "Կրկնեք գաղտնաբառը",
+        "AlreadyHaveAccount": "Արդեն ունեք հաշիվ",
+        "LogInWith": "Մուտք գործեք հետեւյալ հաշիվներով"
+    },
+    "Settings": {
+        "ThemeChanged": "Թեման փոխվեց",
+        "PleaseRestart": "Խնդրում ենք վերագործարկել հավելվածը",
+        "DarkMode": "Մութ ռեժիմ",
+        "LightMode": "Լուսավոր ռեժիմ"
+    }
+}

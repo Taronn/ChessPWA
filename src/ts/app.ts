@@ -19,8 +19,11 @@ import '../css/app.css';
 import App from '../components/app';
 
 // Init F7 React Plugin
-Framework7.use(Framework7React)
+Framework7.use(Framework7React);
+
+import { Provider } from 'react-redux';
+import { store } from '../redux/store';
 
 // Mount React App
 const root = createRoot(document.getElementById('app')!);
-root.render(React.createElement(App));
+root.render(React.createElement(Provider, { store }, React.createElement(App)));
