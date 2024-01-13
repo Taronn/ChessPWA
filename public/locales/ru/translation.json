@@ -1,0 +1,30 @@
+{
+    "Common":{
+        "Username": "Имя пользователя",
+        "Password": "Пароль",
+        "Email": "Электронная почта",
+        "SignIn": "Войти",
+        "SignUp": "Зарегистрироваться"
+    },
+   
+    "SignIn": {
+        "UsernamePlaceholder": "Введите имя пользователя",
+        "PasswordPlaceholder": "Введите пароль",
+        "ForgotPassword": "Забыли пароль?",
+        "DontHaveAccount": "Нет аккаунта?"
+    },
+    "SignUp": {
+        "UsernamePlaceholder": "Строчные буквы, цифры, _, и . разрешены",
+        "PasswordPlaceholder": "8+ символов, строчные и заглавные буквы, цифры",
+        "ConfirmPassword": "Подтвердите пароль",
+        "RepeatPassword": "Повторите пароль",
+        "AlreadyHaveAccount": "Уже есть аккаунт?",
+        "LogInWith": "Войти через"
+    },
+    "Settings": {
+        "ThemeChanged": "Тема изменена",
+        "PleaseRestart": "Пожалуйста, перезапустите приложение",
+        "DarkMode": "Темная тема",
+        "LightMode": "Светлая тема"
+    }
+}
