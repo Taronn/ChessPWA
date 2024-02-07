@@ -37,12 +37,11 @@ const MyApp = () => {
         } else {
           dispatch(setTheme(theme));
           dispatch(setDarkMode(darkMode === 'true'));
-          console.log(colorTheme);
           dispatch(setColorTheme(colorTheme));
         }
       }
       setLoading(false);
-    }, 5000);
+    }, 1000);
   }, []);
 
   const f7params = {
