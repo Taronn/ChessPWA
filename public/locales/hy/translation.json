@@ -6,7 +6,6 @@
         "SignIn": "Մուտք",
         "SignUp": "Գրանցվել"
     },
-   
     "SignIn": {
         "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",
         "PasswordPlaceholder": "Մուտքագրեք ձեր գաղտնաբառը",
@@ -19,7 +18,7 @@
         "ConfirmPassword": "Հաստատեք գաղտնաբառը",
         "RepeatPassword": "Կրկնեք գաղտնաբառը",
         "AlreadyHaveAccount": "Արդեն ունեք հաշիվ",
-        "LogInWith": "Մուտք գործեք հետեւյալ հաշիվներով"
+        "LogInWith": "Մուտք գործեք հետևյալ հաշիվներով"
     },
     "Settings": {
         "ThemeChanged": "Թեման փոխվեց",

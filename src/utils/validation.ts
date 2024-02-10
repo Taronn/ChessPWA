@@ -2,7 +2,7 @@ export function validateUsername(username: string): string {
   if (username.length < 5) {
     return 'Username must be at least 5 characters';
   }
-  if (!username.match(/[a-z0-9._]/)) {
+  if (!username.match(/^[a-z0-9._]+$/)) {
     return 'Username must contain only lowercase, numbers, _, and .';
   }
   return '';
