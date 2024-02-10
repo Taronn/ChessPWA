@@ -58,12 +58,9 @@ const MyApp = () => {
     routes,
 
     // Register service worker (only on production build)
-    serviceWorker:
-      process.env.NODE_ENV === 'production'
-        ? {
-            path: '/service-worker.ts',
-          }
-        : {},
+    serviceWorker: {
+      path: '../service-worker.js',
+    },
   };
 
   const loadingStyle = {
