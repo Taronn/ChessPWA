@@ -10,8 +10,10 @@ import {
   setTheme,
 } from '../redux/slices/appSettingsSlice';
 import logo from '../assets/chess.svg';
+import { useTranslation } from 'react-i18next';
 
 const MyApp = () => {
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -56,6 +58,12 @@ const MyApp = () => {
 
     // App routes
     routes,
+
+    dialog: {
+      // change default "OK" button text
+      buttonOk: t('Common.Ok'),
+      buttonCancel: t('Common.Cancel'),
+    },
 
     // Register service worker (only on production build)
     serviceWorker: {

@@ -1,7 +1,7 @@
 {
-  "name": "ChessPWA",
-  "short_name": "ChessPWA",
-  "description": "ChessPWA",
+  "name": "Chess",
+  "short_name": "Chess",
+  "description": "Chess",
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",

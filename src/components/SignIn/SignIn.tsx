@@ -13,11 +13,43 @@ import { validatePassword, validateUsername } from '../../utils/validation';
 import { SocialLoginButtons } from '../SocialLoginButtons';
 import { LogoLink } from '../LogoLink';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useIsnFetch';
+import { verifyEmail } from '../../utils/emailVerification';
+import { CachePolicies } from 'use-http';
 
 export function SignIn() {
   const { t } = useTranslation();
+  const { post, response, loading } = useIsnFetch('/auth/signin', {
+    Cache: CachePolicies.NO_CACHE,
+  });
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await post({
+        Username: username,
+        Password: password,
+      });
+      if (response.ok) {
+        const { accessToken, refreshToken } = response.data;
+        localStorage.setItem('accessToken', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
+      } else {
+        const errorCode = Array.isArray(response.data.message)
+          ? response.data.message[0]
+          : response.data.message;
+        const message = t(`Errors.${errorCode}`);
+        f7.dialog.alert(message, '', () => {
+          if (errorCode === 'EMAIL_NOT_VERIFIED') {
+            verifyEmail(username, username);
+          }
+        });
+      }
+    },
+    [username, password, post, response]
+  );
 
   const handleUsernameChange = useCallback((e) => {
     const username = e.target.value;
@@ -74,7 +106,14 @@ export function SignIn() {
 
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
-            <Button fill>{t('Common.SignIn')}</Button>
+            <Button
+              fill
+              loading={loading}
+              onClick={submit}
+              disabled={!username || !password}
+            >
+              {t('Common.SignIn')}
+            </Button>
           </div>
           <div className="display-flex margin-right">
             <a>{t('SignIn.ForgotPassword')}</a>

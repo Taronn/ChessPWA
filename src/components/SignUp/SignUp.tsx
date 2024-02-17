@@ -18,13 +18,38 @@ import {
 import { SocialLoginButtons } from '../SocialLoginButtons';
 import { LogoLink } from '../LogoLink';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useIsnFetch';
+import { verifyEmail } from '../../utils/emailVerification';
 
 export function SignUp() {
   const { t } = useTranslation();
+  const { post, response, loading } = useIsnFetch('/auth/signup');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirm] = useState('');
+
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await post({
+        Email: email,
+        Username: username,
+        Password: password,
+        PasswordConfirmation: confirmPassword,
+      });
+      if (response.ok) {
+        verifyEmail(email, username);
+      } else {
+        const errorCode = Array.isArray(response.data.message)
+          ? response.data.message[0]
+          : response.data.message;
+        const message = t(`Errors.${errorCode}`);
+        f7.dialog.alert(message, '');
+      }
+    },
+    [email, username, password, confirmPassword, post, response]
+  );
 
   const handleEmailChange = useCallback((e) => {
     const email = e.target.value;
@@ -125,7 +150,14 @@ export function SignUp() {
 
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
-            <Button fill type="submit">
+            <Button
+              preloader
+              loading={loading}
+              disabled={!email || !username || !password || !confirmPassword}
+              fill
+              type="submit"
+              onClick={submit}
+            >
               {t('Common.SignUp')}
             </Button>
           </div>

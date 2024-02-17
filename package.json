@@ -33,7 +33,8 @@
     "react-i18next": "^14.0.0",
     "react-redux": "^9.0.4",
     "skeleton-elements": "^4.0.1",
-    "swiper": "^11.0.5"
+    "swiper": "^11.0.5",
+    "use-http": "^1.0.28"
   },
   "devDependencies": {
     "@types/react": "^18.2.45",
