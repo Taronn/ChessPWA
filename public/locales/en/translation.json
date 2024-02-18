@@ -17,7 +17,10 @@
         "UsernamePlaceholder": "Enter your username",
         "PasswordPlaceholder": "Enter your password",
         "ForgotPassword": "Forgot Password?",
-        "DontHaveAccount": "Don't have an account?"
+        "DontHaveAccount": "Don't have an account?",
+        "ResetPassword": "Reset Password",
+        "ResetPasswordMessage": "Code has been sent to email {{email}}",
+        "ResetPasswordSuccess": "Password reset successful"
     },
     "SignUp": {
         "UsernamePlaceholder": "lowercase, numbers, _, and . allowed",

@@ -1,4 +1,4 @@
-import { Button, Icon, List, ListButton, ListItem } from 'framework7-react';
+import { Icon, ListButton } from 'framework7-react';
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -6,14 +6,17 @@ import {
   toggleDarkMode,
 } from '../../redux/slices/appSettingsSlice';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useFetch';
 
 export function DarkModeToggler() {
+  const {patch} = useIsnFetch('/settings/me');
   const { t } = useTranslation();
   const darkMode = useSelector(selectDarkMode);
   const dispatch = useDispatch();
-  const handleClick = useCallback(() => {
+  const handleClick = useCallback(async() => {
     dispatch(toggleDarkMode());
-  }, [dispatch]);
+    await patch({DarkMode: !darkMode});
+  }, [dispatch, darkMode, patch]);
 
   const iconMd = useMemo(
     () => (darkMode ? 'material:light_mode' : 'material:dark_mode'),

@@ -13,34 +13,33 @@ import { validatePassword, validateUsername } from '../../utils/validation';
 import { SocialLoginButtons } from '../SocialLoginButtons';
 import { LogoLink } from '../LogoLink';
 import { useTranslation } from 'react-i18next';
-import { useIsnFetch } from '../../hooks/useIsnFetch';
+import { useIsnFetch } from '../../hooks/useFetch';
 import { verifyEmail } from '../../utils/emailVerification';
 import { CachePolicies } from 'use-http';
+import { handleErrorMessage } from '../../utils/handleErrorMessage';
+import { resetPassword } from '../../utils/resetPassword';
 
 export function SignIn() {
   const { t } = useTranslation();
-  const { post, response, loading } = useIsnFetch('/auth/signin', {
-    Cache: CachePolicies.NO_CACHE,
+  const { post: postSignin, response: signinResponse, loading: signinLoading } = useIsnFetch('/auth/signin', {
+    cachePolicy: CachePolicies.NO_CACHE,
   });
+  const { patch: patchForgotPassword, response: forgotPasswordResponse } = useIsnFetch('/auth/forgot-password');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
   const submit = useCallback(
     async (e) => {
       e.preventDefault();
-      await post({
+      await postSignin({
         Username: username,
         Password: password,
       });
-      if (response.ok) {
-        const { accessToken, refreshToken } = response.data;
-        localStorage.setItem('accessToken', accessToken);
-        localStorage.setItem('refreshToken', refreshToken);
+      if (signinResponse.ok) {
+        const { AccessToken, RefreshToken } = signinResponse.data;
+        f7.view.main.router.navigate(`/auth-success/${AccessToken}/${RefreshToken}`);
       } else {
-        const errorCode = Array.isArray(response.data.message)
-          ? response.data.message[0]
-          : response.data.message;
-        const message = t(`Errors.${errorCode}`);
+        const {errorCode, message} = handleErrorMessage(signinResponse);
         f7.dialog.alert(message, '', () => {
           if (errorCode === 'EMAIL_NOT_VERIFIED') {
             verifyEmail(username, username);
@@ -48,7 +47,23 @@ export function SignIn() {
         });
       }
     },
-    [username, password, post, response]
+    [username, password, postSignin, signinResponse]
+  );
+
+  const forgotPassword = useCallback(
+      async () => {
+        const message = validateUsername(username);
+        if (message) {
+          return f7.dialog.alert(message, '');
+        }
+        await patchForgotPassword({ Username: username });
+        if (forgotPasswordResponse.ok) {
+          resetPassword(forgotPasswordResponse.data, username);
+        } else {
+          const { message} = handleErrorMessage(forgotPasswordResponse);
+          f7.dialog.alert(message, '');
+        }
+      },[username]
   );
 
   const handleUsernameChange = useCallback((e) => {
@@ -108,20 +123,21 @@ export function SignIn() {
           <div className="display-flex margin-left">
             <Button
               fill
-              loading={loading}
+              loading={signinLoading}
               onClick={submit}
+              type={'submit'}
               disabled={!username || !password}
             >
               {t('Common.SignIn')}
             </Button>
           </div>
           <div className="display-flex margin-right">
-            <a>{t('SignIn.ForgotPassword')}</a>
+            <a onClick={forgotPassword}>{t('SignIn.ForgotPassword')}</a>
           </div>
         </div>
         <p className="margin-left">
           {t('SignIn.DontHaveAccount')}{' '}
-          <Link href="/signup" className="margin-left-half">
+          <Link href={"/signup"} className="margin-left-half">
             {t('Common.SignUp')}
           </Link>
         </p>

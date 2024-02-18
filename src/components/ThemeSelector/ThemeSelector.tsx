@@ -1,16 +1,19 @@
-import { Icon, List, ListItem, f7 } from 'framework7-react';
+import { Icon, ListItem, f7 } from 'framework7-react';
 import { ChangeEvent, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectTheme, setTheme } from '../../redux/slices/appSettingsSlice';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useFetch';
 
 export function ThemeSelector() {
+  const {patch} = useIsnFetch('/settings/me');
   const { t } = useTranslation();
   const theme = useSelector(selectTheme);
   const dispatch = useDispatch();
   const handleChange = useCallback(
-    (e: ChangeEvent<HTMLSelectElement>) => {
+    async (e: ChangeEvent<HTMLSelectElement>) => {
       dispatch(setTheme(e.target.value));
+      await patch({Theme: e.target.value});
       f7.dialog.alert(t('Settings.PleaseRestart'), t('Settings.ThemeChanged'));
     },
     [dispatch]

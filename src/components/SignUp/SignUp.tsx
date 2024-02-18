@@ -18,8 +18,9 @@ import {
 import { SocialLoginButtons } from '../SocialLoginButtons';
 import { LogoLink } from '../LogoLink';
 import { useTranslation } from 'react-i18next';
-import { useIsnFetch } from '../../hooks/useIsnFetch';
+import { useIsnFetch } from '../../hooks/useFetch';
 import { verifyEmail } from '../../utils/emailVerification';
+import { handleErrorMessage } from '../../utils/handleErrorMessage';
 
 export function SignUp() {
   const { t } = useTranslation();
@@ -41,10 +42,7 @@ export function SignUp() {
       if (response.ok) {
         verifyEmail(email, username);
       } else {
-        const errorCode = Array.isArray(response.data.message)
-          ? response.data.message[0]
-          : response.data.message;
-        const message = t(`Errors.${errorCode}`);
+        const {message} = handleErrorMessage(response);
         f7.dialog.alert(message, '');
       }
     },
@@ -162,7 +160,7 @@ export function SignUp() {
             </Button>
           </div>
           <div className="display-flex margin-right">
-            <Link href="/login">{t('SignUp.AlreadyHaveAccount')}</Link>
+            <Link href={"/login"}>{t('SignUp.AlreadyHaveAccount')}</Link>
           </div>
         </div>
         <p className="margin-left">{t('SignUp.LogInWith')}</p>
