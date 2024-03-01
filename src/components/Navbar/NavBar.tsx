@@ -1,7 +1,6 @@
 import {
   Link,
   List,
-  ListItem,
   Navbar,
   NavLeft,
   NavRight,
@@ -18,6 +17,7 @@ import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
 
 export function NavBar() {
   const darkMode = useSelector(selectDarkMode);
+  const isLoggedin = localStorage.getItem('isLoggedin') === 'true';
   const iconColor = useMemo(() => (darkMode ? 'white' : 'black'), [darkMode]);
   return (
     <Navbar>
@@ -32,21 +32,24 @@ export function NavBar() {
           iconOnly
           popoverOpen=".popover-settings"
         ></Link>
-
-        <Link
-          iconColor={iconColor}
-          iconIos="f7:person_badge_plus"
-          iconMd="material:person_add"
-          iconOnly
-          href="/signup"
-        ></Link>
-        <Link
-          iconColor={iconColor}
-          iconIos="f7:square_arrow_right"
-          iconMd="material:login"
-          iconOnly
-          href="/login"
-        ></Link>
+        {!isLoggedin && (
+          <Link
+            iconColor={iconColor}
+            iconIos="f7:person_badge_plus"
+            iconMd="material:person_add"
+            iconOnly
+            href={"/signup"}
+          ></Link>
+        )}
+        {!isLoggedin && (
+          <Link
+            iconColor={iconColor}
+            iconIos="f7:square_arrow_right"
+            iconMd="material:login"
+            iconOnly
+            href={"/login"}
+          ></Link>
+        )}
       </NavRight>
       <Popover className="popover-settings">
         <List style={{ listStyleType: 'none' }} strong>

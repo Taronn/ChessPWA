@@ -18,13 +18,36 @@ import {
 import { SocialLoginButtons } from '../SocialLoginButtons';
 import { LogoLink } from '../LogoLink';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useFetch';
+import { verifyEmail } from '../../utils/emailVerification';
+import { handleErrorMessage } from '../../utils/handleErrorMessage';
 
 export function SignUp() {
   const { t } = useTranslation();
+  const { post, response, loading } = useIsnFetch('/auth/signup');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirm] = useState('');
+
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await post({
+        Email: email,
+        Username: username,
+        Password: password,
+        PasswordConfirmation: confirmPassword,
+      });
+      if (response.ok) {
+        verifyEmail(email, username);
+      } else {
+        const {message} = handleErrorMessage(response);
+        f7.dialog.alert(message, '');
+      }
+    },
+    [email, username, password, confirmPassword, post, response]
+  );
 
   const handleEmailChange = useCallback((e) => {
     const email = e.target.value;
@@ -125,12 +148,19 @@ export function SignUp() {
 
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
-            <Button fill type="submit">
+            <Button
+              preloader
+              loading={loading}
+              disabled={!email || !username || !password || !confirmPassword}
+              fill
+              type="submit"
+              onClick={submit}
+            >
               {t('Common.SignUp')}
             </Button>
           </div>
           <div className="display-flex margin-right">
-            <Link href="/login">{t('SignUp.AlreadyHaveAccount')}</Link>
+            <Link href={"/login"}>{t('SignUp.AlreadyHaveAccount')}</Link>
           </div>
         </div>
         <p className="margin-left">{t('SignUp.LogInWith')}</p>

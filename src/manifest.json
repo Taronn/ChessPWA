@@ -1,12 +1,12 @@
 {
-  "name": "ChessPWA",
-  "short_name": "ChessPWA",
-  "description": "ChessPWA",
+  "name": "Chess",
+  "short_name": "Chess",
+  "description": "Chess",
   "lang": "en-US",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#EE350F",
-  "theme_color": "#EE350F",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
   "icons": [
     {
       "src": "/icons/16x16.png",

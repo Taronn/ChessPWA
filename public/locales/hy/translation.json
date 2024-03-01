@@ -4,13 +4,24 @@
         "Password": "Գաղտնաբառ",
         "Email": "Էլ. հասցե",
         "SignIn": "Մուտք",
-        "SignUp": "Գրանցվել"
+        "SignUp": "Գրանցվել",
+        "Ok": "Լավ",
+        "Cancel": "Չեղարկել",
+        "VerifyEmail": "Հաստատեք էլ. հասցեն",
+        "VerifyEmailMessage": "Մուտքագրեք {{email}} հասցեին ուղարկված հաստատման կոդը",
+        "Verify": "Հաստատել",
+        "EmailVerified": "Էլ. հասցեն հաստատված է"
     },
     "SignIn": {
         "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",
         "PasswordPlaceholder": "Մուտքագրեք ձեր գաղտնաբառը",
         "ForgotPassword": "Մոռացել եք գաղտնաբառը",
-        "DontHaveAccount": "Չունե՞ք հաշիվ"
+        "DontHaveAccount": "Չունե՞ք հաշիվ",
+        "ResetPassword": "Վերականգնել գաղտնաբառը",
+        "ResetPasswordMessage": "Հաստատման կոդը ուղարկված է {{email}} հասցեին",
+        "PasswordChanged": "Գաղտնաբառը փոխվեց",
+        "PasswordResetSuccess": "Գաղտնաբառը հաջողությամբ վերականգնվեց",
+        "NewPassword": "Նոր գաղտնաբառ"
     },
     "SignUp": {
         "UsernamePlaceholder": "միայն փոքրատառեր, թվեր, _, և .",
@@ -25,5 +36,23 @@
         "PleaseRestart": "Խնդրում ենք վերագործարկել հավելվածը",
         "DarkMode": "Մութ ռեժիմ",
         "LightMode": "Լուսավոր ռեժիմ"
+    },
+    "Errors": {
+        "EMAIL_INVALID": "Էլ․ հասցեն սխալ է",
+        "USERNAME_INVALID": "Մուտքանունը կարող է պարունակել փոքրատառեր, թվեր, _, և .",
+        "USERNAME_LENGTH": "Մուտքանունը պետք է պարունակի առնվազն 5 նիշ",
+        "PASSWORD_WEAK": "Գաղտնաբառը պետք է պարունակի առնվազն 8 նիշ, մեծատառ, փոքրատառ, թիվ",
+        "PASSWORD_MIN_LENGTH": "Պետք է պարունակի առնվազն 8 նիշ",
+        "PASSWORD_UPPERCASE": "Պետք է պարունակի առնվազն մեկ մեծատառ",
+        "PASSWORD_NUMBER": "Պետք է պարունակի առնվազն մեկ թիվ",
+        "PASSWORD_LOWERCASE": "Պետք է պարունակի առնվազն մեկ փոքրատառ",
+        "PASSWORD_NOT_MATCH": "Գաղտնաբառերը չեն համընկնում",
+        "USERNAME_EXISTS": "Մուտքանունը զբաղված է",
+        "EMAIL_EXISTS": "Էլ. հասցեն զբաղված է",
+        "TOKEN_WRONG": "Հաստատման կոդը սխալ է",
+        "EMAIL_ALREADY_VERIFIED": "Էլ. հասցեն արդեն հաստատված է",
+        "USERNAME_WRONG": "Մուտքանունը սխալ է",
+        "PASSWORD_WRONG": "Գաղտնաբառը սխալ է",
+        "EMAIL_NOT_VERIFIED": "Էլ. հասցեն հաստատված չէ"
     }
 }

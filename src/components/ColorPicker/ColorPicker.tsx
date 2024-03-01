@@ -1,15 +1,22 @@
-import { Icon, List, ListInput, f7 } from 'framework7-react';
+import { Icon, ListInput } from 'framework7-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectColorTheme,
   setColorTheme,
 } from '../../redux/slices/appSettingsSlice';
+import { useIsnFetch } from '../../hooks/useFetch';
 
 export function ColorPicker() {
+  const {patch} = useIsnFetch('/settings/me');
+  let timeoutId: NodeJS.Timeout | null = null;
   const color = useSelector(selectColorTheme);
   const dispatch = useDispatch();
-  function handleColorChange(value: any) {
+  async function handleColorChange(value: any) {
     dispatch(setColorTheme(value));
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
+    timeoutId = setTimeout(async () => await patch({ColorTheme: value}), 2000);
   }
 
   return (

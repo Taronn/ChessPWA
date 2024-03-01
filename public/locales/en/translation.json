@@ -4,14 +4,24 @@
         "Password": "Password",
         "Email": "Email",
         "SignIn": "Sign In",
-        "SignUp": "Sign Up"
+        "SignUp": "Sign Up",
+        "Ok": "Ok",
+        "Cancel": "Cancel",
+        "VerifyEmail": "Verify Email",
+        "VerifyEmailMessage": "Enter the verification code sent to {{email}}",
+        "Verify": "Verify",
+        "EmailVerified": "Email Verified"
     },
    
     "SignIn": {
         "UsernamePlaceholder": "Enter your username",
         "PasswordPlaceholder": "Enter your password",
         "ForgotPassword": "Forgot Password?",
-        "DontHaveAccount": "Don't have an account?"
+        "DontHaveAccount": "Don't have an account?",
+        "ResetPassword": "Reset Password",
+        "ResetPasswordMessage": "Code has been sent to email {{email}}",
+        "ResetPasswordSuccess": "Password reset successful",
+        "NewPassword": "New Password"
     },
     "SignUp": {
         "UsernamePlaceholder": "lowercase, numbers, _, and . allowed",
@@ -26,5 +36,23 @@
         "PleaseRestart": "Please restart the app",
         "DarkMode": "Dark Mode",
         "LightMode": "Light Mode"
+    },
+    "Errors": {
+        "EMAIL_INVALID": "Please enter a valid email",
+        "USERNAME_INVALID": "Username must contain only lowercase, numbers, _, and .",
+        "USERNAME_LENGTH": "Username must be at least 5 characters",
+        "PASSWORD_WEAK": "Password must be at least 8 characters, contain at least one uppercase, and one number",
+        "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
+        "PASSWORD_UPPERCASE": "Password must contain at least one uppercase",
+        "PASSWORD_NUMBER": "Password must contain at least one number",
+        "PASSWORD_LOWERCASE": "Password must contain at least one lowercase",
+        "PASSWORD_NOT_MATCH": "Passwords do not match",
+        "USERNAME_EXISTS": "Username already taken",
+        "EMAIL_EXISTS": "Email already exists",
+        "TOKEN_WRONG": "Verfification code is wrong",
+        "EMAIL_ALREADY_VERIFIED": "Email already verified",
+        "USERNAME_WRONG": "User with this username does not exist",
+        "PASSWORD_WRONG": "Password is wrong",
+        "EMAIL_NOT_VERIFIED": "Email is not verified"
     }
 }
