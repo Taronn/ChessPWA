@@ -21,9 +21,16 @@ import { useTranslation } from 'react-i18next';
 import { useIsnFetch } from '../../hooks/useFetch';
 import { verifyEmail } from '../../utils/emailVerification';
 import { handleErrorMessage } from '../../utils/handleErrorMessage';
+import { useEnvVars } from '../../hooks/useEnvVars';
+import ReCAPTCHA from "react-google-recaptcha";
+import { useSelector } from 'react-redux';
+import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
 
 export function SignUp() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const {recaptchaSiteKey} = useEnvVars();
+  const [recaptchaToken, setRecaptchaToken] = useState('');
+  const darkMode = useSelector(selectDarkMode);
   const { post, response, loading } = useIsnFetch('/auth/signup');
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -38,6 +45,7 @@ export function SignUp() {
         Username: username,
         Password: password,
         PasswordConfirmation: confirmPassword,
+        RecaptchaToken: recaptchaToken
       });
       if (response.ok) {
         verifyEmail(email, username);
@@ -46,7 +54,7 @@ export function SignUp() {
         f7.dialog.alert(message, '');
       }
     },
-    [email, username, password, confirmPassword, post, response]
+    [email, username, password, confirmPassword, post, response, recaptchaToken]
   );
 
   const handleEmailChange = useCallback((e) => {
@@ -83,6 +91,10 @@ export function SignUp() {
     },
     [password]
   );
+
+  const recaptchaChange = useCallback((value: string) => {
+    setRecaptchaToken(value);
+  }, []);
 
   const iconClassName = useMemo(
     () => (f7.theme === 'ios' ? 'padding-top margin-top-half' : ''),
@@ -145,13 +157,13 @@ export function SignUp() {
         >
           <Icon material="password" className={iconClassName} slot="media" />
         </ListInput>
-
+        <ReCAPTCHA className="margin-left" theme={darkMode ? 'dark' : 'light'} hl={i18n.language} sitekey={recaptchaSiteKey} onChange={recaptchaChange}/>
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
             <Button
               preloader
               loading={loading}
-              disabled={!email || !username || !password || !confirmPassword}
+              disabled={!email || !username || !password || !confirmPassword || !recaptchaToken}
               fill
               type="submit"
               onClick={submit}
