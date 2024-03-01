@@ -20,7 +20,8 @@
         "DontHaveAccount": "Нет аккаунта?",
         "ResetPassword": "Сбросить пароль",
         "ResetPasswordMessage": "Код подтверждения отправлен на {{email}}",
-        "ResetPasswordSuccess": "Пароль успешно изменен"
+        "ResetPasswordSuccess": "Пароль успешно изменен",
+        "NewPassword": "Новый пароль"
     },
     "SignUp": {
         "UsernamePlaceholder": "Строчные буквы, цифры, _, и . разрешены",

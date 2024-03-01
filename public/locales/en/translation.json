@@ -20,7 +20,8 @@
         "DontHaveAccount": "Don't have an account?",
         "ResetPassword": "Reset Password",
         "ResetPasswordMessage": "Code has been sent to email {{email}}",
-        "ResetPasswordSuccess": "Password reset successful"
+        "ResetPasswordSuccess": "Password reset successful",
+        "NewPassword": "New Password"
     },
     "SignUp": {
         "UsernamePlaceholder": "lowercase, numbers, _, and . allowed",

@@ -15,7 +15,7 @@ export function resetPassword(email: string, username: string) {
             </div>
             <div class="item-input item-input-outline">
               <div class="item-input-wrap">
-                <input type="password" id="password" placeholder="New Password" class="dialog-input" style="font-family: 'Courier New', monospace; border-bottom: 1px solid #ccc;">
+                <input type="password" id="password" placeholder="${t('SignIn.NewPassword')}" class="dialog-input" style="font-family: 'Courier New', monospace; border-bottom: 1px solid #ccc;">
               </div>
             </div>
             `,

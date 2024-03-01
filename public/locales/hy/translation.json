@@ -20,7 +20,8 @@
         "ResetPassword": "Վերականգնել գաղտնաբառը",
         "ResetPasswordMessage": "Հաստատման կոդը ուղարկված է {{email}} հասցեին",
         "PasswordChanged": "Գաղտնաբառը փոխվեց",
-        "PasswordResetSuccess": "Գաղտնաբառը հաջողությամբ վերականգնվեց"
+        "PasswordResetSuccess": "Գաղտնաբառը հաջողությամբ վերականգնվեց",
+        "NewPassword": "Նոր գաղտնաբառ"
     },
     "SignUp": {
         "UsernamePlaceholder": "միայն փոքրատառեր, թվեր, _, և .",
