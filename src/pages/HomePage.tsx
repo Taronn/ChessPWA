@@ -1,11 +1,12 @@
-import { Page, Link, Block, Card, CardContent } from 'framework7-react';
-import { NavBar } from '../../components/Navbar';
+import { Page, Link, Block, Card, CardContent, Button } from 'framework7-react';
+import { NavBar } from '../components/Shared/NavBar';
 
 export function HomePage() {
   return (
     <Page name="home">
       <NavBar />
       <Block>
+        <Button text='Play' href='/play' raised fill/>
         <p>
           This is a boilerplate project for building Chess PWA with Framework7
           and React

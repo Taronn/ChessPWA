@@ -10,8 +10,8 @@ import {
 } from 'framework7-react';
 import { useCallback, useMemo, useState } from 'react';
 import { validatePassword, validateUsername } from '../../utils/validation';
-import { SocialLoginButtons } from '../SocialLoginButtons';
-import { LogoLink } from '../LogoLink';
+import { SocialLoginButtons } from '../Shared/SocialLoginButtons';
+import { LogoLink } from '../Shared/LogoLink';
 import { useTranslation } from 'react-i18next';
 import { useIsnFetch } from '../../hooks/useFetch';
 import { verifyEmail } from '../../utils/emailVerification';

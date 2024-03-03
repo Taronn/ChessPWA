@@ -23,6 +23,7 @@
     "framework7": "^8.3.0",
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.0",
+    "i18n-iso-countries": "^7.10.0",
     "i18next": "^23.7.13",
     "i18next-browser-languagedetector": "^7.2.0",
     "i18next-http-backend": "^2.4.2",

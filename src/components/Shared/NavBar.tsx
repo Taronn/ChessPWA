@@ -6,12 +6,12 @@ import {
   NavRight,
   Popover,
 } from 'framework7-react';
-import { LogoLink } from '../LogoLink';
-import { LanguageSelector } from '../LanguageSelector';
+import { LogoLink } from './LogoLink';
+import { LanguageSelector } from './LanguageSelector';
 import { useMemo } from 'react';
-import { DarkModeToggler } from '../DarkModeToggler';
-import { ThemeSelector } from '../ThemeSelector';
-import { ColorPicker } from '../ColorPicker';
+import { DarkModeToggler } from './DarkModeToggler';
+import { ThemeSelector } from './ThemeSelector';
+import { ColorPicker } from './ColorPicker';
 import { useSelector } from 'react-redux';
 import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
 

@@ -9,12 +9,21 @@ import {
   setDarkMode,
   setTheme,
 } from '../redux/slices/appSettingsSlice';
+
+// @ts-ignore
 import logo from '../assets/chess.svg';
 import { useTranslation } from 'react-i18next';
 import { refreshTokens, useIsnFetch } from '../hooks/useFetch';
 import { setUser } from '../redux/slices/userSlice';
+import countries from 'i18n-iso-countries';
+import en from 'i18n-iso-countries/langs/en.json';
+import ru from 'i18n-iso-countries/langs/ru.json';
+import hy from 'i18n-iso-countries/langs/hy.json';
 
 const MyApp = () => {
+  countries.registerLocale(en);
+  countries.registerLocale(ru);
+  countries.registerLocale(hy);
   const { t, i18n } = useTranslation();
   const {get} = useIsnFetch(`/users/me`)
   const dispatch = useDispatch();
@@ -88,7 +97,7 @@ const MyApp = () => {
             browserHistory
             browserHistorySeparator=""
             className="safe-areas"
-            url="/"
+            url="/play"
           />
         </App>
       )}

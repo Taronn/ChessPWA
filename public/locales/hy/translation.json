@@ -37,6 +37,11 @@
         "DarkMode": "Մութ ռեժիմ",
         "LightMode": "Լուսավոր ռեժիմ"
     },
+    "PlayersList": {
+        "Remove": "Հեռացնել",
+        "RemoveMessage": "{{username}}-ը կհեռացվի ցուցակից",
+        "Play": "Խաղալ"
+    },
     "Errors": {
         "EMAIL_INVALID": "Էլ․ հասցեն սխալ է",
         "USERNAME_INVALID": "Մուտքանունը կարող է պարունակել փոքրատառեր, թվեր, _, և .",

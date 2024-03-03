@@ -1,1 +1,0 @@
-export {AuthSuccess} from './AuthSuccess';

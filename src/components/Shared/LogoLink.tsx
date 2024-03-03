@@ -1,21 +1,28 @@
 import { Link } from 'framework7-react';
-import { LogoLinkProps } from './types';
 import { useSelector } from 'react-redux';
 import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
 import { useMemo } from 'react';
+
+interface ILogoLinkProps {
+  size: string;
+  href?: string;
+  darkModeFill?: string;
+  lightModeFill?: string;
+}
 
 export function LogoLink({
   size,
   darkModeFill = 'white',
   lightModeFill = 'black',
-}: LogoLinkProps) {
+}: ILogoLinkProps) {
   const darkMode = useSelector(selectDarkMode);
   const fill = useMemo(
     () => (darkMode ? darkModeFill : lightModeFill),
     [darkMode]
   );
+
   return (
-    <Link back color={fill}>
+    <Link href='/' color={fill}>
       <svg
         fill={fill}
         version="1.1"
