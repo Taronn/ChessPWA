@@ -1,5 +1,4 @@
 import { App, View } from 'framework7-react';
-
 import routes from '../ts/routes';
 import '../ts/i18n';
 import { useDispatch } from 'react-redux';
@@ -19,8 +18,12 @@ import countries from 'i18n-iso-countries';
 import en from 'i18n-iso-countries/langs/en.json';
 import ru from 'i18n-iso-countries/langs/ru.json';
 import hy from 'i18n-iso-countries/langs/hy.json';
+import { useEnvVars } from '../hooks/useEnvVars';
+import { useSignalR } from '../hooks/useSignalR';
 
 const MyApp = () => {
+  const {dotnetURL} = useEnvVars();
+  const {SignalRContext} = useSignalR();
   countries.registerLocale(en);
   countries.registerLocale(ru);
   countries.registerLocale(hy);
@@ -91,15 +94,20 @@ const MyApp = () => {
           <img src={logo} style={{ width: '100px' }}  alt={'Logo'}/>
         </div>
       ) : (
-        <App {...f7params}>
-          <View
-            main
-            browserHistory
-            browserHistorySeparator=""
-            className="safe-areas"
-            url="/play"
-          />
-        </App>
+        <SignalRContext.Provider url={`${dotnetURL}/chess-hub`}
+                                 withCredentials={true}
+                                 accessTokenFactory={() => localStorage.getItem('accessToken')!}
+        >
+          <App {...f7params}>
+            <View
+              main
+              browserHistory
+              browserHistorySeparator=""
+              className="safe-areas"
+              url="/play"
+            />
+          </App>
+        </SignalRContext.Provider>
       )}
     </>
   );

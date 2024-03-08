@@ -1,8 +1,11 @@
 import { List } from 'framework7-react';
 import { PlayersListItem } from './PlayersListItem';
 import { GameType } from '../Shared/constants';
+import { useSignalR } from '../../hooks/useSignalR';
 
 export function PlayersList() {
+  const { SignalRContext } = useSignalR();
+  SignalRContext.useSignalREffect("GetPlayersList", (players) => console.log(players), []);
   const usernames = ['player1', 'player2', 'player3', 'player4', 'player5'];
   const countries = ['us', 'gb', 'ge', 'de', 'am'];
 
