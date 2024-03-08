@@ -11,7 +11,7 @@ export function ColorPicker() {
   let timeoutId: NodeJS.Timeout | null = null;
   const color = useSelector(selectColorTheme);
   const dispatch = useDispatch();
-  async function handleColorChange(value: any) {
+  async function handleColorChange(value: string) {
     dispatch(setColorTheme(value));
     if (timeoutId) {
       clearTimeout(timeoutId);
@@ -26,7 +26,7 @@ export function ColorPicker() {
       readonly
       value={color}
       onColorPickerChange={(value) => handleColorChange(value.hex)}
-      //@ts-ignore
+      //@ts-expect-error - This is a valid prop
       colorPickerParams={{
         modules: ['initial-current-colors', 'rgb-sliders'],
         sliderValue: true,

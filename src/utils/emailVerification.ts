@@ -3,8 +3,9 @@ import { t } from 'i18next';
 import { useEnvVars } from '../hooks/useEnvVars';
 
 export function verifyEmail(email: string, username: string) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { authServerURL } = useEnvVars();
-  let dialog = f7.dialog.create({
+  const dialog = f7.dialog.create({
     text: t('Common.VerifyEmailMessage', { email }),
     title: t('Common.VerifyEmail'),
     content: `

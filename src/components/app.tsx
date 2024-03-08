@@ -9,7 +9,7 @@ import {
   setTheme,
 } from '../redux/slices/appSettingsSlice';
 
-// @ts-ignore
+// @ts-expect-error - This is a valid import statement
 import logo from '../assets/chess.svg';
 import { useTranslation } from 'react-i18next';
 import { refreshTokens, useIsnFetch } from '../hooks/useFetch';

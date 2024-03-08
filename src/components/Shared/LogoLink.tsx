@@ -18,7 +18,7 @@ export function LogoLink({
   const darkMode = useSelector(selectDarkMode);
   const fill = useMemo(
     () => (darkMode ? darkModeFill : lightModeFill),
-    [darkMode]
+    [darkMode, darkModeFill, lightModeFill]
   );
 
   return (

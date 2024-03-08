@@ -11,7 +11,7 @@ export function LanguageSelector() {
       i18n.changeLanguage(e.target.value);
       await patch({Language: e.target.value});
     },
-    [i18n]
+    [i18n, patch]
   );
   return (
     <ListItem

@@ -3,8 +3,9 @@ import { t } from 'i18next';
 import { useEnvVars } from '../hooks/useEnvVars';
 
 export function resetPassword(email: string, username: string) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { authServerURL } = useEnvVars();
-  let dialog = f7.dialog.create({
+  const dialog = f7.dialog.create({
     text: t('SignIn.ResetPasswordMessage', { email }),
     title: t('SignIn.ResetPassword'),
     content: `

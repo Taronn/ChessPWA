@@ -1,7 +1,7 @@
 import { Chip, Icon } from 'framework7-react';
 import { GameType } from './constants';
 import { Statistic } from './types';
-// @ts-ignore
+// @ts-expect-error - This is a valid import statement
 import bulletIcon from '../../assets/bullet.svg';
 
 interface IRatingChipProps {

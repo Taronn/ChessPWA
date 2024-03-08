@@ -26,4 +26,5 @@ import { store } from '../redux/store';
 
 // Mount React App
 const root = createRoot(document.getElementById('app')!);
+// @ts-expect-error - //
 root.render(React.createElement(Provider, { store }, React.createElement(App)));

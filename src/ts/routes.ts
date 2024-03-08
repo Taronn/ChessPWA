@@ -4,11 +4,11 @@ import { SignUpPage } from '../pages/SignUpPage';
 import {AuthSuccess} from "../pages/AuthSuccess";
 import { MainPage } from '../pages/MainPage';
 
-var routes = [
+const routes = [
   {
     path: '/',
     component: HomePage,
-    beforeEnter: function ({ resolve, reject }) {
+    beforeEnter: function({ resolve, reject }) {
       const isLoggedIn = localStorage.getItem('isLoggedin') === 'true';
       if (!isLoggedIn) {
         resolve();

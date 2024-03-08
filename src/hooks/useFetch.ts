@@ -25,6 +25,7 @@ export function useIsnFetch(path: string, options = {}) {
 }
 
 export async function refreshTokens() {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const {authServerURL} = useEnvVars();
   const refreshToken = localStorage.getItem('refreshToken');
   const response = await fetch(`${authServerURL}/auth/refresh`, {

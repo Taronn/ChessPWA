@@ -9,6 +9,7 @@
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development vite --host --port 3000",
     "build": "cross-env NODE_ENV=production vite build && npx workbox generateSW workbox-config.js",
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
     "postinstall": "cpy --flat ./node_modules/framework7-icons/fonts/*.* ./src/fonts/ && cpy --flat ./node_modules/material-icons/iconfont/*.* ./src/fonts/"
   },
   "browserslist": [
@@ -19,7 +20,12 @@
   ],
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^7.1.1",
+    "@typescript-eslint/parser": "^7.1.1",
     "dom7": "^4.0.6",
+    "eslint": "^8.57.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.5",
     "framework7": "^8.3.0",
     "framework7-icons": "^5.0.5",
     "framework7-react": "^8.3.0",

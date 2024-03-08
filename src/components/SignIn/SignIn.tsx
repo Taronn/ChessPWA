@@ -63,7 +63,7 @@ export function SignIn() {
           const { message} = handleErrorMessage(forgotPasswordResponse);
           f7.dialog.alert(message, '');
         }
-      },[username]
+      },[forgotPasswordResponse, patchForgotPassword, username]
   );
 
   const handleUsernameChange = useCallback((e) => {

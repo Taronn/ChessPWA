@@ -16,7 +16,7 @@ export function ThemeSelector() {
       await patch({Theme: e.target.value});
       f7.dialog.alert(t('Settings.PleaseRestart'), t('Settings.ThemeChanged'));
     },
-    [dispatch]
+    [dispatch, patch, t]
   );
 
   return (
