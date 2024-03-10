@@ -17,7 +17,7 @@ export function MainToolbar() {
       <Link
         tabLink="#tournments"
         // iconMaterial='trophy'
-        iconMaterial="emoji_events"
+        iconMaterial="game"
       />
       <Link
         tabLink="#chat"

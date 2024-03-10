@@ -10,7 +10,15 @@
         "VerifyEmail": "Подтвердите электронную почту",
         "VerifyEmailMessage": "Введите код подтверждения, отправленный на {{email}}",
         "Verify": "Подтвердить",
-        "EmailVerified": "Электронная почта подтверждена"
+        "EmailVerified": "Электронная почта подтверждена",
+        "Minutes": "минут",
+        "Seconds": "секунд",
+        "Message": "Сообщение",
+        "Color": "Цвет",
+        "White": "Белый",
+        "white": "Белый",
+        "Black": "Черный",
+        "black": "Черный"
     },
    
     "SignIn": {
@@ -41,6 +49,10 @@
         "Remove": "Удалить",
         "RemoveMessage": "{{username}} будет удален из списка игроков",
         "Play": "Играть"
+    },
+    "InviteModal": {
+        "InitialTime": "Время",
+        "BonusTime": "Бонусное время"
     },
     "Errors": {
         "EMAIL_INVALID": "Неверный формат электронной почты",

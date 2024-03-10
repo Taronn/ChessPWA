@@ -10,7 +10,15 @@
         "VerifyEmail": "Հաստատեք էլ. հասցեն",
         "VerifyEmailMessage": "Մուտքագրեք {{email}} հասցեին ուղարկված հաստատման կոդը",
         "Verify": "Հաստատել",
-        "EmailVerified": "Էլ. հասցեն հաստատված է"
+        "EmailVerified": "Էլ. հասցեն հաստատված է",
+        "Minutes": "րոպե",
+        "Seconds": "վարկյան",
+        "Message": "Հաղորդագրություն",
+        "Color": "Գույն",
+        "White": "Սպիտակ",
+        "white": "Սպիտակ",
+        "Black": "Սև",
+        "black": "Սև"
     },
     "SignIn": {
         "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",
@@ -41,6 +49,10 @@
         "Remove": "Հեռացնել",
         "RemoveMessage": "{{username}}-ը կհեռացվի ցուցակից",
         "Play": "Խաղալ"
+    },
+    "InviteModal": {
+        "InitialTime": "Սկզբնական ժամանակ",
+        "BonusTime": "Լրացուցիչ ժամանակ"
     },
     "Errors": {
         "EMAIL_INVALID": "Էլ․ հասցեն սխալ է",

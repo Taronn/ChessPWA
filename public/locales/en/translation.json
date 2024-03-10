@@ -10,7 +10,15 @@
     "VerifyEmail": "Verify Email",
     "VerifyEmailMessage": "Enter the verification code sent to {{email}}",
     "Verify": "Verify",
-    "EmailVerified": "Email Verified"
+    "EmailVerified": "Email Verified",
+    "Minutes": "minutes",
+    "Seconds": "seconds",
+    "Message": "Message",
+    "Color": "Color",
+    "White": "White",
+    "white": "White",
+    "Black": "Black",
+    "black": "Black"
   },
   "SignIn": {
     "UsernamePlaceholder": "Enter your username",
@@ -40,6 +48,10 @@
     "Remove": "Remove",
     "RemoveMessage": "{{username}} will be removed from the list",
     "Play": "Play"
+  },
+  "InviteModal": {
+    "InitialTime": "Initial Time",
+    "BonusTime": "Bonus Time"
   },
   "Errors": {
     "EMAIL_INVALID": "Please enter a valid email",

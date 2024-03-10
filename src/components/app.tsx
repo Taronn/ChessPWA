@@ -3,11 +3,7 @@ import routes from '../ts/routes';
 import '../ts/i18n';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import {
-  setColorTheme,
-  setDarkMode,
-  setTheme,
-} from '../redux/slices/appSettingsSlice';
+import { setColorTheme, setDarkMode, setTheme } from '../redux/slices/appSettingsSlice';
 
 // @ts-expect-error - This is a valid import statement
 import logo from '../assets/chess.svg';
@@ -20,6 +16,9 @@ import ru from 'i18n-iso-countries/langs/ru.json';
 import hy from 'i18n-iso-countries/langs/hy.json';
 import { useEnvVars } from '../hooks/useEnvVars';
 import { useSignalR } from '../hooks/useSignalR';
+import { ReceiveInviteModal } from './Shared/ReceiveInviteModal';
+import { IInvite } from './Shared/types';
+import { Color, GameType } from './Shared/constants';
 
 const MyApp = () => {
   const {dotnetURL} = useEnvVars();
@@ -87,6 +86,49 @@ const MyApp = () => {
     height: '100vh',
   };
 
+  const invite: IInvite = {
+    from: {
+      username: 'test',
+      country: 'am',
+      statistics: [
+        {
+          rating: 1500,
+          type: GameType.RAPID,
+        },
+        {
+          rating: 1500,
+          type: GameType.BLITZ,
+        },
+        {
+          rating: 1500,
+          type: GameType.BULLET,
+        }
+      ],
+    },
+    fromColor: Color.WHITE,
+    to:{
+      username: 'test111111111',
+      country: 'am',
+      statistics: [
+        {
+          rating: 1500,
+          type: GameType.RAPID,
+        },
+        {
+          rating: 1500,
+          type: GameType.BLITZ,
+        },
+        {
+          rating: 1500,
+          type: GameType.BULLET,
+        }
+      ],
+    },
+    toColor: Color.BLACK,
+    initialTime: 3,
+    bonusTime: 5,
+  }
+
   return (
     <>
       {loading ? (
@@ -106,6 +148,7 @@ const MyApp = () => {
               className="safe-areas"
               url="/play"
             />
+            {/*<ReceiveInviteModal opened={true} setOpened={()=>console.log('')} invite={invite}/>*/}
           </App>
         </SignalRContext.Provider>
       )}

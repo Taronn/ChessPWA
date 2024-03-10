@@ -2,6 +2,7 @@ import { List } from 'framework7-react';
 import { PlayersListItem } from './PlayersListItem';
 import { GameType } from '../Shared/constants';
 import { useSignalR } from '../../hooks/useSignalR';
+import { IPlayer } from '../Shared/types';
 
 export function PlayersList() {
   const { SignalRContext } = useSignalR();
@@ -13,7 +14,7 @@ export function PlayersList() {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  function getRandomPlayer() {
+  function getRandomPlayer(): IPlayer {
     return {
       username: usernames[getRandomInt(0, usernames.length - 1)],
       country: countries[getRandomInt(0, countries.length - 1)],

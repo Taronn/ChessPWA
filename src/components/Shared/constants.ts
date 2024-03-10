@@ -3,3 +3,8 @@ export enum GameType {
   BLITZ = 'blitz',
   BULLET = 'bullet',
 }
+
+export enum Color {
+  WHITE = 'white',
+  BLACK = 'black',
+}
