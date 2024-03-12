@@ -96,6 +96,7 @@ export function SignIn() {
           label={t('Common.Username')}
           type="text"
           placeholder={t('SignIn.UsernamePlaceholder')}
+          autocapitalize="none"
           value={username}
           floatingLabel
           validate

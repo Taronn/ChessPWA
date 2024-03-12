@@ -38,10 +38,9 @@ export function ReceiveInviteModal({ opened, setOpened, invite }: IReceiveInvite
         </BlockTitle>
         <Block>
           <List className="no-margin">
-            <ListItem title={t('Common.Color')} badge={t(`Common.${invite.toColor}`)}><Icon slot="media"
-                                                                                            material="contrast" /></ListItem>
+            <ListItem title={t('Common.Color')} badge={t(`Common.${invite.toColor}`)}><Icon slot="media" material="contrast" /></ListItem>
             <ListItem title={t('InviteModal.InitialTime')} badge={`${initialTime} ${t('Common.Minutes')}`}><Icon
-              slot="media" material="timer" /></ListItem>
+              slot="media" className="material-icons-outlined" material="timer" /></ListItem>
             <ListItem title={t('InviteModal.BonusTime')} badge={`${bonusTime} ${t('Common.Seconds')}`}><Icon
               slot="media" material="more_time" /></ListItem>
           </List>

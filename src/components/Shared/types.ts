@@ -1,5 +1,18 @@
 import { Color, GameType } from './constants';
 
+export interface IUser {
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  picture: string,
+  country: string,
+  gender: string,
+  lastLogin: Date,
+  createdAt: Date,
+  updatedAt: Date,
+}
+
 export interface IStatistic {
   type: GameType
   rating: number
@@ -11,6 +24,7 @@ export interface IStatistic {
 
 export interface IPlayer {
   username: string
+  color: Color | null,
   country: string
   statistics: IStatistic[]
 }

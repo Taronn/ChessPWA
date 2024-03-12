@@ -111,6 +111,7 @@ export function SignUp() {
           label={t('Common.Email')}
           type="email"
           placeholder="example@email.com"
+          autocapitalize="none"
           value={email}
           floatingLabel
           validate
@@ -124,6 +125,7 @@ export function SignUp() {
           type="text"
           placeholder={t('SignUp.UsernamePlaceholder')}
           value={username}
+          autocapitalize="none"
           floatingLabel
           validate
           onInput={handleUsernameChange}

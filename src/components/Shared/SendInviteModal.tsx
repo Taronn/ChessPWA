@@ -46,7 +46,7 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
             </div>
             <ListItem>
               <div>
-                <Icon material="timer" />
+                <Icon className="material-icons-outlined" material="timer" />
               </div>
               <div style={{ width: '100%', margin: '0 16px' }}>
                 <Range min={1} max={60} step={1} value={initialTime} label

@@ -1,4 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { IUser } from '../../components/Shared/types';
 
 const initialState = {
   username: '',
@@ -32,7 +33,8 @@ export const userSlice = createSlice({
   },
 });
 
-export const selectUser = (state) => state;
+export const selectUser = (state: { user: IUser }) => state.user;
+export const selectUsername = (state: {user: IUser}) => state.user.username;
 
 export const { setUser } =
  userSlice.actions;

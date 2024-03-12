@@ -28,7 +28,7 @@ export function RatingChip({ statistic, slot}: IRatingChipProps) {
   return (
     <Chip text={rating} slot={slot} mediaBgColor="" outline tooltipTrigger="click"
           tooltip={type.toUpperCase()}>
-      {type === GameType.BULLET ? <img src={bulletIcon} alt="bullet"  style={styles[type]} slot='media'/> : <Icon slot="media" {...styles[type]} />}
+      {type === GameType.BULLET ? <img src={bulletIcon} alt="bullet"  style={styles[type]} slot='media'/> : <Icon slot="media" className="material-icons-outlined" {...styles[type]} />}
     </Chip>
   );
 }

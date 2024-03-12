@@ -125,7 +125,7 @@ const MyApp = () => {
       ],
     },
     toColor: Color.BLACK,
-    initialTime: 3,
+    initialTime: 30,
     bonusTime: 5,
   }
 
@@ -148,6 +148,7 @@ const MyApp = () => {
               className="safe-areas"
               url="/play"
             />
+
             {/*<ReceiveInviteModal opened={true} setOpened={()=>console.log('')} invite={invite}/>*/}
           </App>
         </SignalRContext.Provider>

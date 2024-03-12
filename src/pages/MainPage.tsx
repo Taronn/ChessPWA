@@ -3,6 +3,7 @@ import { NavBar } from '../components/Shared/NavBar';
 import { PlayersList } from '../components/PlayersList';
 import { MainToolbar } from '../components/MainToolbar';
 import { Profile } from '../components/Profile';
+import { ChessBoard } from '../components/ChessBoard';
 
 export function MainPage() {
 
@@ -10,15 +11,15 @@ export function MainPage() {
     <Page name="main" pageContent={false} noSwipeback>
       <NavBar/>
       <MainToolbar/>
-      <Tabs animated>
+      <Tabs>
         <Tab id='players' className="page-content" tabActive>
           <PlayersList/>
         </Tab>
         <Tab id='games' className='page-content'>
           <Profile/>
         </Tab>
-        <Tab id='tournments' className='page-content'>
-          <Profile/>
+        <Tab id='chess' className='page-content'>
+          <ChessBoard/>
         </Tab>
         <Tab id='chat' className='page-content'>
           <Profile/>

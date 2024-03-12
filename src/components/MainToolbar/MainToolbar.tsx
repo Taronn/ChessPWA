@@ -14,11 +14,11 @@ export function MainToolbar() {
         iconIos="f7:eye_fill"
         iconMd="material:visibility"
       />
-      <Link
-        tabLink="#tournments"
-        // iconMaterial='trophy'
-        iconMaterial="game"
-      />
+        <Link tabLink="#chess"
+              iconMaterial="sports_esports"
+              iconIos="f7:gamecontroller_fill"
+        >
+      </Link>
       <Link
         tabLink="#chat"
         iconIos="f7:chat_bubble_2_fill"
