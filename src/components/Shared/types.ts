@@ -11,15 +11,16 @@ export interface IUser {
   lastLogin: Date,
   createdAt: Date,
   updatedAt: Date,
+  statistics: IStatistic[]
 }
 
 export interface IStatistic {
   type: GameType
   rating: number
-  gamesPlayed?: number
-  wins?: number
-  losses?: number
-  draws?: number
+  gamesPlayed: number
+  wins: number
+  losses: number
+  draws: number
 }
 
 export interface IPlayer {

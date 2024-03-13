@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IUser } from '../../components/Shared/types';
+import { convertKeysToCamelCase } from '../../utils/convertKeysToCamelCase';
 
 const initialState = {
   username: '',
@@ -12,6 +13,7 @@ const initialState = {
   lastLogin: '',
   createdAt: '',
   updatedAt: '',
+  statistics: [],
 };
 
 export const userSlice = createSlice({
@@ -29,6 +31,9 @@ export const userSlice = createSlice({
       state.lastLogin = payload.LastLogin;
       state.createdAt = payload.CreatedAt;
       state.updatedAt = payload.UpdatedAt;
+      state.statistics[0] = convertKeysToCamelCase(payload.Statistics[0]);
+      state.statistics[1] = convertKeysToCamelCase(payload.Statistics[1]);
+      state.statistics[2] = convertKeysToCamelCase(payload.Statistics[2]);
     },
   },
 });

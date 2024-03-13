@@ -7,7 +7,7 @@ import { f7 } from 'framework7-react';
 import { PlayerInfoPanel } from './PlayerInfoPanel';
 
 export function ChessBoard() {
-  const size = Math.min(window.innerWidth - 45, window.innerHeight - 150);
+  const size = Math.min(window.innerWidth - 45, window.innerHeight - 320);
   const { SignalRContext } = useSignalR();
 
   const player = {
@@ -69,8 +69,10 @@ export function ChessBoard() {
       setChess({ ...chess });
     }
     f7.on('tabShow', () => board.current = Chessboard2('chessboard', config));
+    f7.on('tabHide', () => console.log(board.current));
     return () => {
       f7.off('tabShow');
+      f7.off('tabHide');
     };
   }, []);
 
