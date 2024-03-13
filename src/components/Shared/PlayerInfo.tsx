@@ -26,10 +26,10 @@ export function PlayerInfo({player, initialTime} : IPlayerInfoProps) {
     , [initialTime, player.statistics]);
 
   return (
-    <div>
-      <Icon ios="f7:person" md="material:person" className="margin-right-half" />
-      <span>{player.username}</span>
-      <Icon className="margin-horizontal-half" tooltip={countryName} tooltipTrigger="click">
+    <div className="display-flex align-items-center">
+      <Icon ios="f7:person" md="material:person" className="margin-right-half display-flex" />
+      <span className="display-flex" style={{fontWeight: 'bold'}}>{player.username}</span>
+      <Icon className="margin-horizontal-half display-flex" tooltip={countryName} tooltipTrigger="click">
         <img
           src={`https://flagcdn.com/${player.country}.svg`}
           width="24"

@@ -53,6 +53,10 @@
     "InitialTime": "Initial Time",
     "BonusTime": "Bonus Time"
   },
+  "Chess": {
+    "Draw": "Draw",
+    "Resign": "Resign"
+  },
   "Errors": {
     "EMAIL_INVALID": "Please enter a valid email",
     "USERNAME_INVALID": "Username must contain only lowercase, numbers, _, and .",

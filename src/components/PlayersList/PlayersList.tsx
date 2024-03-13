@@ -39,7 +39,7 @@ export function PlayersList() {
   const players = Array.from({ length: 20 }, getRandomPlayer);
 
   return (
-    <List strong inset outline dividers>
+    <List strong inset dividers outline className="margin-vertical">
       {players.map((player, index) => <PlayersListItem key={index} slot="list" player={player} />)}
     </List>
   );

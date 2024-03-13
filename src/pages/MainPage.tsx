@@ -18,7 +18,7 @@ export function MainPage() {
         <Tab id='games' className='page-content'>
           <Profile/>
         </Tab>
-        <Tab id='chess' className='page-content'>
+        <Tab id='chess' className="page-content">
           <ChessBoard/>
         </Tab>
         <Tab id='chat' className='page-content'>

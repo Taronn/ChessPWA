@@ -4,6 +4,7 @@ import { Color, GameType } from '../Shared/constants';
 import { useEffect, useRef, useState } from 'react';
 import { useSignalR } from '../../hooks/useSignalR';
 import { f7 } from 'framework7-react';
+import { PlayerInfoPanel } from './PlayerInfoPanel';
 
 export function ChessBoard() {
   const size = Math.min(window.innerWidth - 45, window.innerHeight - 150);
@@ -70,7 +71,7 @@ export function ChessBoard() {
     f7.on('tabShow', () => board.current = Chessboard2('chessboard', config));
     return () => {
       f7.off('tabShow');
-    }
+    };
   }, []);
 
   const onTouchSquare = (square, piece, boardInfo) =>
@@ -128,6 +129,12 @@ export function ChessBoard() {
   }
 
   return (
-    <div id="chessboard" style={{ width: size, height: size }}></div>
+    <div className="display-flex justify-content-center margin-top">
+      <div style={{ width: size }} >
+        <PlayerInfoPanel player={player} initialTime={10} isOpponent={true} />
+        <div id="chessboard" className="display-block" style={{ width: size, height: size }}></div>
+        <PlayerInfoPanel player={player} initialTime={10} />
+      </div>
+    </div>
   );
 }
