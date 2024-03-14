@@ -6,6 +6,7 @@ import { MainPage } from '../pages/MainPage';
 
 const routes = [
   {
+    name: 'home',
     path: '/',
     component: HomePage,
     beforeEnter: function({ resolve, reject }) {
@@ -18,21 +19,51 @@ const routes = [
     },
   },
   {
+    name: 'login',
     path: '/login',
     component: SignInPage,
   },
   {
+    name: 'signup',
     path: '/signup',
     component: SignUpPage,
   },
   {
+    name: 'auth-success',
     path: '/auth-success/:accessToken/:refreshToken',
     component: AuthSuccess,
   },
   {
-    path: '/play',
+    path: '/tabs/',
     component: MainPage,
-  },
+    tabs: [
+      {
+        name: 'players',
+        path: '/players',
+        id: 'players',
+      },
+      {
+        name: 'games',
+        path: '/games',
+        id: 'games',
+      },
+      {
+        name: 'chess',
+        path: '/chess',
+        id: 'chess',
+      },
+      {
+        name: 'chat',
+        path: '/chat',
+        id: 'chat',
+      },
+      {
+        name: 'profile',
+        path: '/profile',
+        id: 'profile',
+      }
+    ]
+  }
 ];
 
 export default routes;

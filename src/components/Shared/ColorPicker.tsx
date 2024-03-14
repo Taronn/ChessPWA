@@ -1,4 +1,4 @@
-import { Icon, ListInput } from 'framework7-react';
+import { ListInput } from 'framework7-react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   selectColorTheme,
@@ -35,12 +35,10 @@ export function ColorPicker() {
         formatValue: (value) => `${value.hex}`,
       }}
     >
-      <Icon
+      <i
         slot="media"
-        color={color.hex}
-        f7="app_fill"
-        className="colors-picker-target"
-        style={{ cursor: 'pointer' }}
+        style={{ backgroundColor: `${color.hex}` }}
+        className="icon f7-icons colors-picker-target"
       />
     </ListInput>
   );

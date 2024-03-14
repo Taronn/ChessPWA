@@ -6,7 +6,7 @@ export function HomePage() {
     <Page name="home">
       <NavBar />
       <Block>
-        <Button text='Play' href='/play' raised fill/>
+        <Button text='Play' href='tabs/players' raised fill/>
         <p>
           This is a boilerplate project for building Chess PWA with Framework7
           and React

@@ -69,7 +69,7 @@ export function ChessBoard() {
       setChess({ ...chess });
     }
     f7.on('tabShow', () => board.current = Chessboard2('chessboard', config));
-    f7.on('tabHide', () => console.log(board.current));
+    f7.on('', () => console.log(board.current));
     return () => {
       f7.off('tabShow');
       f7.off('tabHide');

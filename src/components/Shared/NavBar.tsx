@@ -15,30 +15,33 @@ import { ColorPicker } from './ColorPicker';
 import { useSelector } from 'react-redux';
 import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
 
-export function NavBar() {
+export function NavBar({ activeTab }) {
   const darkMode = useSelector(selectDarkMode);
   const isLoggedin = localStorage.getItem('isLoggedin') === 'true';
   const iconColor = useMemo(() => (darkMode ? 'white' : 'black'), [darkMode]);
+
   return (
     <Navbar>
       <NavLeft>
         <LogoLink size="35px" />
       </NavLeft>
       <NavRight>
-        <Link
-          iconColor={iconColor}
-          iconIos="f7:gear"
-          iconMd="material:settings"
-          iconOnly
-          popoverOpen=".popover-settings"
-        ></Link>
+        {!isLoggedin && (
+          <Link
+            iconColor={iconColor}
+            iconIos="f7:gear"
+            iconMd="material:settings"
+            iconOnly
+            popoverOpen=".popover-settings"
+          ></Link>
+        )}
         {!isLoggedin && (
           <Link
             iconColor={iconColor}
             iconIos="f7:person_badge_plus"
             iconMd="material:person_add"
             iconOnly
-            href={"/signup"}
+            href={'/signup'}
           ></Link>
         )}
         {!isLoggedin && (
@@ -47,9 +50,25 @@ export function NavBar() {
             iconIos="f7:square_arrow_right"
             iconMd="material:login"
             iconOnly
-            href={"/login"}
+            href={'/login'}
           ></Link>
         )}
+        {activeTab === 'profile' ? (
+            <Link
+              iconColor={iconColor}
+              iconIos="f7:menu"
+              iconMd="material:menu"
+              iconOnly
+              panelOpen='#settings-panel'
+              // panelClose
+            ></Link>
+          ) :
+          <Link
+            iconColor={iconColor}
+            iconF7="paperplane_fill"
+            iconOnly
+            href={'/login'}
+          ></Link>}
       </NavRight>
       <Popover className="popover-settings">
         <List style={{ listStyleType: 'none' }} strong>

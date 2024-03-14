@@ -1,17 +1,14 @@
 import { IStatistic } from '../Shared/types';
-import { Gauge, List, ListItem, PieChart } from 'framework7-react';
+import { List, ListItem, PieChart } from 'framework7-react';
 
 interface IStatisticsProps {
   statistics: IStatistic;
 }
 
 export function Statistics({ statistics }: IStatisticsProps) {
-  const drawPercentage = statistics.draws / statistics.gamesPlayed;
-  const winPercentage = statistics.wins / statistics.gamesPlayed;
-  const lossPercentage = statistics.losses / statistics.gamesPlayed;
   return (
     <div>
-      <List outline dividers>
+      <List outline dividers inset strong>
         <ListItem>
           <div slot="title">Rating</div>
           <div slot="after">{statistics.rating}</div>
@@ -21,51 +18,21 @@ export function Statistics({ statistics }: IStatisticsProps) {
           <div slot="after">{statistics.gamesPlayed}</div>
         </ListItem>
         <ListItem>
-          <div slot="title">Wins
-            <Gauge
-              className="margin-horizontal-half"
-              size={50}
-              valueFontSize={9}
-              type="semicircle"
-              value={winPercentage}
-              valueText={`${(winPercentage * 100).toFixed(0)}%`}
-              valueTextColor="green"
-              borderColor="green"
-            /></div>
+          <div slot="title">Wins</div>
           <div slot="after">{statistics.wins}</div>
         </ListItem>
         <ListItem>
-          <div slot="title">Losses
-            <Gauge
-              className="margin-horizontal-half"
-              size={50}
-              valueFontSize={9}
-              type="semicircle"
-              value={lossPercentage}
-              valueText={`${(lossPercentage * 100).toFixed(0)}%`}
-              valueTextColor="red"
-              borderColor="red"
-            /></div>
+          <div slot="title">Losses</div>
           <div slot="after">{statistics.losses}</div>
         </ListItem>
         <ListItem>
-          <div slot="title">Draws
-            <Gauge
-              className="margin-horizontal-half"
-              size={50}
-              valueFontSize={9}
-              type="semicircle"
-              value={drawPercentage}
-              valueText={`${(drawPercentage * 100).toFixed(0)}%`}
-              valueTextColor="gray"
-              borderColor="gray"
-            />
-          </div>
+          <div slot="title">Draws</div>
           <div slot="after">{statistics.draws}</div>
         </ListItem>
       </List>
 
       <PieChart
+        style={{maxWidth: '300px', margin: 'auto'}}
         tooltip
         datasets={[
           {
@@ -80,7 +47,7 @@ export function Statistics({ statistics }: IStatisticsProps) {
           },
           {
             value: statistics.draws,
-            color: 'blue',
+            color: 'gray',
             label: 'Draws',
           }
         ]}

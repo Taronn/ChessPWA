@@ -28,7 +28,7 @@ export function DarkModeToggler() {
   );
   return (
     <ListButton onClick={handleClick}>
-      <Icon slot="title" ios={iconIos} md={iconMd} />
+      <Icon slot="media" ios={iconIos} md={iconMd} />
       <span className="margin-left-half">
         {darkMode ? t('Settings.LightMode') : t('Settings.DarkMode')}
       </span>
