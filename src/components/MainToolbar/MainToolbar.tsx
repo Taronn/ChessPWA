@@ -2,7 +2,7 @@ import { Link, Toolbar } from 'framework7-react';
 
 export function MainToolbar() {
   return (
-    <Toolbar tabbar icons position="bottom" outline style={{ height: '60px'}}>
+    <Toolbar tabbar icons position="bottom" outline>
       <Link
         href="players/"
         routeTabId="players"
