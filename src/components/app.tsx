@@ -40,10 +40,10 @@ const MyApp = () => {
     if (isAuth){
       const user = await get();
       dispatch(setUser(user));
-      theme = Themes[user.Settings.Theme];
-      darkMode = user.Settings.DarkMode;
-      colorTheme = user.Settings.ColorTheme;
-      i18n.changeLanguage(Languages[user.Settings.Language]);
+      theme = Themes[user.settings.theme];
+      darkMode = user.settings.darkMode;
+      colorTheme = user.settings.colorTheme;
+      i18n.changeLanguage(Languages[user.settings.language]);
     }
     dispatch(setTheme(theme));
     dispatch(setDarkMode(darkMode));

@@ -21,27 +21,30 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setUser: (state, { payload }) => {
-      state.username = payload.Username;
-      state.email = payload.Email;
-      state.firstName = payload.FirstName;
-      state.lastName = payload.LastName;
-      state.picture = payload.Picture;
-      state.country = payload.Country;
-      state.gender = payload.Gender;
-      state.lastLogin = payload.LastLogin;
-      state.createdAt = payload.CreatedAt;
-      state.updatedAt = payload.UpdatedAt;
-      state.statistics[0] = convertKeysToCamelCase(payload.Statistics[0]);
-      state.statistics[1] = convertKeysToCamelCase(payload.Statistics[1]);
-      state.statistics[2] = convertKeysToCamelCase(payload.Statistics[2]);
+      Object.keys(payload).forEach((key) => {
+        state[key] = payload[key];
+      });
+      // state.username = payload.Username;
+      // state.email = payload.Email;
+      // state.firstName = payload.FirstName;
+      // state.lastName = payload.LastName;
+      // state.picture = payload.Picture;
+      // state.country = payload.Country;
+      // state.gender = payload.Gender;
+      // state.lastLogin = payload.LastLogin;
+      // state.createdAt = payload.CreatedAt;
+      // state.updatedAt = payload.UpdatedAt;
+      // state.statistics[0] = convertKeysToCamelCase(payload.statistics[0]);
+      // state.statistics[1] = convertKeysToCamelCase(payload.statistics[1]);
+      // state.statistics[2] = convertKeysToCamelCase(payload.statistics[2]);
     },
   },
 });
 
 export const selectUser = (state: { user: IUser }) => state.user;
-export const selectUsername = (state: {user: IUser}) => state.user.username;
+export const selectUsername = (state: { user: IUser }) => state.user.username;
 
 export const { setUser } =
- userSlice.actions;
+  userSlice.actions;
 
 export default userSlice.reducer;

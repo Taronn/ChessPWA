@@ -1,5 +1,6 @@
 import { useFetch } from 'use-http';
 import { useEnvVars } from './useEnvVars';
+import { toCamel } from '../utils/convertKeysToCamelCase';
 
 export function useIsnFetch(path: string, options = {}) {
   const { authServerURL } = useEnvVars();
@@ -18,6 +19,7 @@ export function useIsnFetch(path: string, options = {}) {
         if (response.status === 401) {
           await refreshTokens();
         }
+        response.data = toCamel(response.data);
         return response;
       }
     }
