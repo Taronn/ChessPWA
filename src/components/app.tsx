@@ -18,7 +18,7 @@ import { useEnvVars } from '../hooks/useEnvVars';
 import { useSignalR } from '../hooks/useSignalR';
 import { ReceiveInviteModal } from './Shared/ReceiveInviteModal';
 import { IInvite } from './Shared/types';
-import { Color, GameType } from './Shared/constants';
+import { Color, GameType, Languages, Themes } from './Shared/constants';
 
 const MyApp = () => {
   const {dotnetURL} = useEnvVars();
@@ -40,10 +40,10 @@ const MyApp = () => {
     if (isAuth){
       const user = await get();
       dispatch(setUser(user));
-      theme = user.Settings.Theme;
+      theme = Themes[user.Settings.Theme];
       darkMode = user.Settings.DarkMode;
       colorTheme = user.Settings.ColorTheme;
-      i18n.changeLanguage(user.Settings.Language);
+      i18n.changeLanguage(Languages[user.Settings.Language]);
     }
     dispatch(setTheme(theme));
     dispatch(setDarkMode(darkMode));
@@ -138,6 +138,7 @@ const MyApp = () => {
       ) : (
         <SignalRContext.Provider url={`${dotnetURL}/chess-hub`}
                                  withCredentials={true}
+                                 connectEnabled={localStorage.getItem('isLoggedin') === 'true'}
                                  accessTokenFactory={() => localStorage.getItem('accessToken')!}
         >
           <App {...f7params}>

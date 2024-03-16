@@ -53,7 +53,7 @@ export function NavBar({ activeTab }) {
             href={'/login'}
           ></Link>
         )}
-        {activeTab === 'profile' ? (
+        {activeTab === 'profile' && (
             <Link
               iconColor={iconColor}
               iconIos="f7:menu"
@@ -62,13 +62,14 @@ export function NavBar({ activeTab }) {
               panelOpen='#settings-panel'
               // panelClose
             ></Link>
-          ) :
+          ) }
+        {(isLoggedin && activeTab !== 'profile') && (
           <Link
             iconColor={iconColor}
             iconF7="paperplane_fill"
             iconOnly
             href={'/login'}
-          ></Link>}
+          ></Link>)}
       </NavRight>
       <Popover className="popover-settings">
         <List style={{ listStyleType: 'none' }} strong>

@@ -2,6 +2,7 @@ import { Icon, ListItem } from 'framework7-react';
 import { ChangeEvent, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useIsnFetch } from '../../hooks/useFetch';
+import { Language } from './constants';
 
 export function LanguageSelector() {
   const {patch} = useIsnFetch('/settings/me');
@@ -9,7 +10,7 @@ export function LanguageSelector() {
   const changeLanguage = useCallback(
     async (e: ChangeEvent<HTMLSelectElement>) => {
       i18n.changeLanguage(e.target.value);
-      await patch({Language: e.target.value});
+      await patch({Language: Language[e.target.value.toUpperCase()]});
     },
     [i18n, patch]
   );

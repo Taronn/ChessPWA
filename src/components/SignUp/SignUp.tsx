@@ -159,7 +159,7 @@ export function SignUp() {
         >
           <Icon material="password" className={iconClassName} slot="media" />
         </ListInput>
-        <ReCAPTCHA className="margin-left" theme={darkMode ? 'dark' : 'light'} hl={i18n.language} sitekey={recaptchaSiteKey} onChange={recaptchaChange}/>
+        <ReCAPTCHA className="margin-top-half margin-left" theme={darkMode ? 'dark' : 'light'} hl={i18n.language} sitekey={recaptchaSiteKey} onChange={recaptchaChange}/>
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
             <Button

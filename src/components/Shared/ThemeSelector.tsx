@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectTheme, setTheme } from '../../redux/slices/appSettingsSlice';
 import { useTranslation } from 'react-i18next';
 import { useIsnFetch } from '../../hooks/useFetch';
+import { Theme } from './constants';
 
 export function ThemeSelector() {
   const {patch} = useIsnFetch('/settings/me');
@@ -13,7 +14,7 @@ export function ThemeSelector() {
   const handleChange = useCallback(
     async (e: ChangeEvent<HTMLSelectElement>) => {
       dispatch(setTheme(e.target.value));
-      await patch({Theme: e.target.value});
+      await patch({Theme: Theme[e.target.value.toUpperCase()]});
       f7.dialog.alert(t('Settings.PleaseRestart'), t('Settings.ThemeChanged'));
     },
     [dispatch, patch, t]

@@ -9,7 +9,6 @@ interface IProfileProps {
 }
 export function Profile({user}:IProfileProps) {
   const [statsType, setStatsType] = useState(GameType.RAPID);
-
   return (
     <div className="margin-top padding-horizontal" style={{maxWidth: '800px', margin: '0 auto'}}>
       <div className="display-flex justify-content-space-between padding-vertical-half">
