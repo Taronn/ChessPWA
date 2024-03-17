@@ -9,9 +9,10 @@ import { IPlayer } from '../Shared/types';
 interface IPlayersListItemProps {
   slot: string;
   player: IPlayer;
+  showRating?: boolean;
 }
 
-export function PlayersListItem({slot, player}: IPlayersListItemProps) {
+export function PlayersListItem({slot, player, showRating = true}: IPlayersListItemProps) {
   const {t, i18n} = useTranslation();
   const [showSendInviteModal, setShowSendInviteModal] = useState(false);
   const maxStat = player.statistics.reduce((max, stat) => (stat.rating > max.rating) ? stat : max, player.statistics[0]);
@@ -27,7 +28,7 @@ export function PlayersListItem({slot, player}: IPlayersListItemProps) {
             alt={player.country}
           />
         </Icon>
-        <RatingChip statistic={maxStat} slot="after" />
+        {showRating && <RatingChip statistic={maxStat} slot="after" />}
 
         <SwipeoutActions left>
           <SwipeoutButton delete confirmText={t('PlayersList.RemoveMessage', {username: player.username})} confirmTitle=" ">

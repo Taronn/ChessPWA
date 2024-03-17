@@ -15,7 +15,7 @@ export function Profile({user}:IProfileProps) {
         <div>
           <h2 className="no-margin">{`${user.firstName ?? ''} ${user.lastName ?? ''}`}</h2>
           <h4 className="no-margin">{user.username}</h4>
-          <Link text={'12 friends'} iconF7="person_2" iconSize={18} className="margin-top-half"/>
+          <Link text={'12 friends'} iconF7="person_2" iconSize={18} className="margin-top-half" panelOpen='#friends-panel'/>
         </div>
         <div>
           {user.picture ?

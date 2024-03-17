@@ -36,8 +36,8 @@ export function SignIn() {
         Password: password,
       });
       if (signinResponse.ok) {
-        const { AccessToken, RefreshToken } = signinResponse.data;
-        f7.view.main.router.navigate(`/auth-success/${AccessToken}/${RefreshToken}`);
+        const { accessToken, refreshToken } = signinResponse.data;
+        f7.view.main.router.navigate(`/auth-success/${accessToken}/${refreshToken}`);
       } else {
         const {errorCode, message} = handleErrorMessage(signinResponse);
         f7.dialog.alert(message, '', () => {

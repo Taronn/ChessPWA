@@ -11,7 +11,7 @@ export function Statistics({ statistics }: IStatisticsProps) {
       <List outline dividers inset strong>
         <ListItem>
           <div slot="title">Rating</div>
-          <div slot="after">{statistics.rating}</div>
+          <div slot="after">{statistics?.rating}</div>
         </ListItem>
         <ListItem>
           <div slot="title">Games Played</div>

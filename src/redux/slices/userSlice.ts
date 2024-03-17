@@ -24,19 +24,6 @@ export const userSlice = createSlice({
       Object.keys(payload).forEach((key) => {
         state[key] = payload[key];
       });
-      // state.username = payload.Username;
-      // state.email = payload.Email;
-      // state.firstName = payload.FirstName;
-      // state.lastName = payload.LastName;
-      // state.picture = payload.Picture;
-      // state.country = payload.Country;
-      // state.gender = payload.Gender;
-      // state.lastLogin = payload.LastLogin;
-      // state.createdAt = payload.CreatedAt;
-      // state.updatedAt = payload.UpdatedAt;
-      // state.statistics[0] = convertKeysToCamelCase(payload.statistics[0]);
-      // state.statistics[1] = convertKeysToCamelCase(payload.statistics[1]);
-      // state.statistics[2] = convertKeysToCamelCase(payload.statistics[2]);
     },
   },
 });
