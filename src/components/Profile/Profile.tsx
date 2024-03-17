@@ -7,19 +7,31 @@ import { Statistics } from './Statistics';
 import { SettingsPanel } from './SettingsPanel';
 import { FriendsPanel } from './FriendsPanel';
 import { useTranslation } from 'react-i18next';
+import countries from 'i18n-iso-countries';
 interface IProfileProps {
   user: IUser;
 }
 export function Profile({user}:IProfileProps) {
-  const {t} = useTranslation();
+  const {t, i18n} = useTranslation();
   const [statsType, setStatsType] = useState(GameType.RAPID);
+  const countryName = countries.getName(user.country, i18n.language);
   return (
     <div className="margin-top padding-horizontal" style={{maxWidth: '800px', margin: '0 auto'}}>
       <div className="display-flex justify-content-space-between padding-vertical-half">
         <div>
           <h2 className="no-margin">{`${user.firstName ?? ''} ${user.lastName ?? ''}`}</h2>
-          <h4 className="no-margin">{user.username}</h4>
-          <Link text={`18 ${t('Common.Friends')}`} iconF7="person_2" iconSize={18} className="margin-top-half" panelOpen='#friends-panel'/>
+          <div className="display-flex">
+            <h4 className="no-margin">{user.username}</h4>
+            <Icon className="margin-left-half" tooltip={countryName} tooltipTrigger="click">
+              <img
+                src={`https://flagcdn.com/${user.country}.svg`}
+                width="24"
+                alt={user.country}
+              />
+            </Icon>
+          </div>
+          <Link text={`18 ${t('Common.Friends')}`} iconF7="person_2" iconSize={18} className="margin-top-half"
+                panelOpen="#friends-panel" />
         </div>
         <div>
           {user.picture ?
