@@ -1,4 +1,4 @@
-import { List, Page, Panel, Tab, Tabs } from 'framework7-react';
+import { Page, Tab, Tabs } from 'framework7-react';
 import { NavBar } from '../components/Shared/NavBar';
 import { PlayersList } from '../components/PlayersList';
 import { MainToolbar } from '../components/MainToolbar';
@@ -7,13 +7,12 @@ import { ChessBoard } from '../components/ChessBoard';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/userSlice';
 import { useState } from 'react';
-import { PlayersListItem } from '../components/PlayersList/PlayersListItem';
-import { getRandomPlayer } from '../utils/generatePlayer';
+
 
 export function MainPage() {
   const user = useSelector(selectUser);
   const [tab, setTab] = useState('');
-  const players = Array.from({ length: 20 }, getRandomPlayer);
+
   return (
     <Page name="main" pageContent={false} noSwipeback id="main">
       <NavBar activeTab={tab}/>
@@ -35,11 +34,6 @@ export function MainPage() {
           <Profile user={user}/>
         </Tab>
       </Tabs>
-      <Panel left push swipe id="friends-panel">
-        <List noChevron dividersIos outline inset>
-          {players.map((player, index) => <PlayersListItem key={index} slot="list" player={player} showRating={false}/>)}
-        </List>
-      </Panel>
     </Page>
   );
 }

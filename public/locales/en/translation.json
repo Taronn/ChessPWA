@@ -18,7 +18,12 @@
     "White": "White",
     "white": "White",
     "Black": "Black",
-    "black": "Black"
+    "black": "Black",
+    "Search": "Search",
+    "Friends": "Friends",
+    "NothingFound": "Nothing found",
+    "Settings": "Settings",
+    "LogOut": "Log out"
   },
   "SignIn": {
     "UsernamePlaceholder": "Enter your username",
@@ -56,6 +61,15 @@
   "Chess": {
     "Draw": "Draw",
     "Resign": "Resign"
+  },
+  "Profile": {
+    "Rating": "Rating",
+    "GamesPlayed": "Games Played",
+    "Wins": "Wins",
+    "Losses": "Losses",
+    "Draws": "Draws",
+    "EditProfile": "Edit Profile",
+    "ShareProfile": "Share Profile"
   },
   "Errors": {
     "EMAIL_INVALID": "Please enter a valid email",

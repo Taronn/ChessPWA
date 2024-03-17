@@ -18,7 +18,12 @@
         "White": "Սպիտակ",
         "white": "Սպիտակ",
         "Black": "Սև",
-        "black": "Սև"
+        "black": "Սև",
+        "Search": "Փնտրել",
+        "Friends": "Ընկերներ",
+        "NothingFound": "Ոչինչ չի գտնվել",
+        "Settings": "Կարգավորումներ",
+        "LogOut": "Դուրս գալ"
     },
     "SignIn": {
         "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",
@@ -57,6 +62,15 @@
     "Chess": {
         "Draw": "Ոչ-ոքի",
         "Resign": "Հանձնվել"
+    },
+    "Profile": {
+        "Rating": "Վարկանիշ",
+        "GamesPlayed": "Խաղերի քանակ",
+        "Wins": "Հաղթանակներ",
+        "Losses": "Պարտություններ",
+        "Draws": "Ոչ-ոքի",
+        "EditProfile": "Խմբագրել",
+        "ShareProfile": "Կիսվել"
     },
     "Errors": {
         "EMAIL_INVALID": "Էլ․ հասցեն սխալ է",

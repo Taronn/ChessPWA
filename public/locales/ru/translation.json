@@ -18,7 +18,12 @@
         "White": "Белый",
         "white": "Белый",
         "Black": "Черный",
-        "black": "Черный"
+        "black": "Черный",
+        "Search": "Поиск",
+        "Friends": "Друзья",
+        "NothingFound": "Ничего не найдено",
+        "Settings": "Настройки",
+        "LogOut": "Выйти"
     },
    
     "SignIn": {
@@ -57,6 +62,15 @@
     "Chess": {
         "Draw": "Ничья",
         "Resign": "Сдаться"
+    },
+    "Profile": {
+        "Rating": "Рейтинг",
+        "GamesPlayed": "Сыграно игр",
+        "Wins": "Победы",
+        "Losses": "Поражения",
+        "Draws": "Ничьи",
+        "EditProfile": "Редактировать",
+        "ShareProfile": "Поделиться"
     },
     "Errors": {
         "EMAIL_INVALID": "Неверный формат электронной почты",
