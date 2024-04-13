@@ -22,6 +22,9 @@ export function ReceiveInviteModal({ opened, setOpened, invite }: IReceiveInvite
   const { t } = useTranslation();
   const {from: player, initialTime, bonusTime} = invite;
 
+
+  
+
   return (
     <Sheet style={{ height: 'auto' }} swipeToClose opened={opened}
            onSheetClosed={() => setOpened(false)}>

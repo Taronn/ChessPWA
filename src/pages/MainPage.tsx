@@ -1,4 +1,4 @@
-import { Page, Tab, Tabs } from 'framework7-react';
+import { Button, Page, Tab, Tabs } from 'framework7-react';
 import { NavBar } from '../components/Shared/NavBar';
 import { PlayersList } from '../components/PlayersList';
 import { MainToolbar } from '../components/MainToolbar';
@@ -7,6 +7,7 @@ import { ChessBoard } from '../components/ChessBoard';
 import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/userSlice';
 import { useState } from 'react';
+import { Chat } from '../components/Chat/Chat';
 
 
 export function MainPage() {
@@ -14,7 +15,7 @@ export function MainPage() {
   const [tab, setTab] = useState('');
 
   return (
-    <Page name="main" pageContent={false} noSwipeback id="main">
+    <Page name="main" pageContent={false}  noSwipeback id="main">
       <NavBar activeTab={tab}/>
       <MainToolbar/>
       <Tabs routable>
@@ -28,7 +29,8 @@ export function MainPage() {
           <ChessBoard/>
         </Tab>
         <Tab id='chat' className='page-content' onTabShow={() => setTab('chat')}>
-          <Profile user={user}/>
+          <Chat/>
+          <Button popupOpen='.chatPopup'>Button</Button>
         </Tab>
         <Tab id='profile' className='page-content' onTabShow={() => setTab('profile')}>
           <Profile user={user}/>
