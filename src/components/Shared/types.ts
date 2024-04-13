@@ -24,6 +24,7 @@ export interface IStatistic {
 }
 
 export interface IPlayer {
+  id: string;
   username: string
   color: Color | null,
   country: string

@@ -150,7 +150,7 @@ const MyApp = () => {
               url="/play"
             />
 
-            {/*<ReceiveInviteModal opened={true} setOpened={()=>console.log('')} invite={invite}/>*/}
+            <ReceiveInviteModal opened={false} setOpened={()=>console.log('')} invite={invite}/>
           </App>
         </SignalRContext.Provider>
       )}

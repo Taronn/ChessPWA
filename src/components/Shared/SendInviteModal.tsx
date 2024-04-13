@@ -8,23 +8,33 @@ import {
   ListItem,
   PageContent,
   Range,
+  Segmented,
   Sheet,
 } from 'framework7-react';
 import { IPlayer } from './types';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { PlayerInfo } from './PlayerInfo';
-
+import { Color } from './constants';
+import { useSignalR } from '../../hooks/useSignalR';
 interface ISendInviteModalProps {
   opened: boolean;
   setOpened: (opened: boolean) => void;
   player: IPlayer;
 }
 
+
+
 export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalProps) {
   const { t } = useTranslation();
+  const { SignalRContext } = useSignalR();
   const [initialTime, setInitialTime] = useState(15);
   const [bonusTime, setBonusTime] = useState(5);
+  const [color, setColor] = useState(Color.WHITE);
+  
+  function InviteSend(message) {
+    SignalRContext.invoke('InvitePlayer', message);
+  }
 
   return (
     <Sheet style={{ height: 'auto' }} swipeToClose backdrop opened={opened}
@@ -33,12 +43,19 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
         <BlockTitle medium className="display-flex justify-content-space-between">
           <PlayerInfo player={player} initialTime={initialTime} />
           <div>
-            <Button fill round onClick={() => setOpened(false)} iconMaterial="send"
+            <Button fill round onClick={() => { InviteSend(player.id); setOpened(false)}} iconMaterial="send"
                     className="float-right padding" />
           </div>
         </BlockTitle>
         <Block>
-
+          <Segmented strong tag="p">
+            <Button active={color === Color.WHITE} onClick={() => setColor(Color.WHITE)}>
+              {t('Common.White')}
+            </Button>
+            <Button active={color === Color.BLACK} onClick={() => setColor(Color.BLACK)}>
+              {t('Common.Black')}
+            </Button>
+          </Segmented>
           <List className="margin-bottom-half">
             <div className="display-flex justify-content-space-between">
               <small>{t('InviteModal.InitialTime')}</small>
