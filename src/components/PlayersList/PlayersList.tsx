@@ -1,18 +1,25 @@
+import { useState } from 'react';
 import { List, ListItem, Searchbar } from 'framework7-react';
 import { PlayersListItem } from './PlayersListItem';
 import { useSignalR } from '../../hooks/useSignalR';
-import { getRandomPlayer } from '../../utils/generatePlayer';
 import { useTranslation } from 'react-i18next';
 
 export function PlayersList() {
   const { t } = useTranslation();
   const { SignalRContext } = useSignalR();
-  SignalRContext.useSignalREffect('GetPlayersList', (players) => {
-    console.log(players);
-  }, []);
+  const [players, setPlayers] = useState([]);
 
+  SignalRContext.useSignalREffect('GetPlayersList', (newPlayers) => {
+    setPlayers(newPlayers);
+  }, [setPlayers]);
 
-  const players = Array.from({ length: 20 }, getRandomPlayer);
+  SignalRContext.useSignalREffect('PlayerJoin', (player) => {
+    setPlayers(prevPlayers => [...prevPlayers, player]);
+  }, [setPlayers]);
+
+  SignalRContext.useSignalREffect('PlayerLeave', (playerId) => {
+    setPlayers(players => players.filter(p => p.id !== playerId));
+  }, [setPlayers]);
 
   return (
     <div>
