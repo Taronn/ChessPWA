@@ -11,7 +11,7 @@ import {
   Segmented,
   Sheet,
 } from 'framework7-react';
-import { IPlayer } from './types';
+import { IInvite, IPlayer } from './types';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { PlayerInfo } from './PlayerInfo';
@@ -23,17 +23,24 @@ interface ISendInviteModalProps {
   player: IPlayer;
 }
 
-
-
 export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalProps) {
   const { t } = useTranslation();
   const { SignalRContext } = useSignalR();
   const [initialTime, setInitialTime] = useState(15);
   const [bonusTime, setBonusTime] = useState(5);
   const [color, setColor] = useState(Color.WHITE);
+  const [message, setMessage] = useState("");
+
   
-  function InviteSend(message) {
-    SignalRContext.invoke('InvitePlayer', message);
+  const invite: IInvite = {
+    fromColor: color,
+    initialTime: initialTime,
+    bonusTime: bonusTime,
+  }
+
+  function sendInvite() {
+    SignalRContext.invoke('InvitePlayer', player.id, invite,message);
+    setOpened(false);
   }
 
   return (
@@ -43,7 +50,7 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
         <BlockTitle medium className="display-flex justify-content-space-between">
           <PlayerInfo player={player} initialTime={initialTime} />
           <div>
-            <Button fill round onClick={() => { InviteSend(player.id); setOpened(false)}} iconMaterial="send"
+            <Button fill round onClick={() => { sendInvite();}} iconMaterial="send"
                     className="float-right padding" />
           </div>
         </BlockTitle>
@@ -89,6 +96,8 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
 
           <List className="no-margin">
             <ListInput type="textarea"
+                       value={message}
+                       onChange={(text) => setMessage(text.target.value)}
                        placeholder={t('Common.Message')}
                        resizable outline maxlength={50} />
           </List>
