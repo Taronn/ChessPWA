@@ -31,15 +31,16 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
   const [color, setColor] = useState(Color.WHITE);
   const [message, setMessage] = useState("");
 
-  
   const invite: IInvite = {
     fromColor: color,
-    initialTime: initialTime,
-    bonusTime: bonusTime,
+    timer: initialTime,
+    timerIncrement: bonusTime,
+    message:message
   }
 
   function sendInvite() {
-    SignalRContext.invoke('InvitePlayer', player.id, invite,message);
+    SignalRContext.invoke('InvitePlayer', player.id, invite);
+    console.log(invite);
     setOpened(false);
   }
 

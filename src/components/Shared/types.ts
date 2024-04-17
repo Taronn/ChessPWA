@@ -36,6 +36,7 @@ export interface IInvite {
   fromColor: Color
   to: IPlayer
   toColor: Color
-  initialTime: number
-  bonusTime: number
+  timer: number
+  timerIncrement: number
+  message:string
 }
