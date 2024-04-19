@@ -106,7 +106,7 @@ const MyApp = () => {
               url="/play"
             />
 
-            {/* <ReceiveInviteModal/> */}
+            <ReceiveInviteModal/>
           </App>
         </SignalRContext.Provider>
       )}
