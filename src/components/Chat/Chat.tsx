@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useSignalR } from '../../hooks/useSignalR';
 import {
     Navbar,
     Page,
@@ -17,17 +18,12 @@ import {
 } from 'framework7-react';
 
 export function Chat() {
-    const images = [
-        'https://cdn.framework7.io/placeholder/cats-300x300-1.jpg',
-        'https://cdn.framework7.io/placeholder/cats-200x300-2.jpg',
-        'https://cdn.framework7.io/placeholder/cats-400x300-3.jpg',
-        'https://cdn.framework7.io/placeholder/cats-300x150-4.jpg',
-        'https://cdn.framework7.io/placeholder/cats-150x300-5.jpg',
-        'https://cdn.framework7.io/placeholder/cats-300x300-6.jpg',
-        'https://cdn.framework7.io/placeholder/cats-300x300-7.jpg',
-        'https://cdn.framework7.io/placeholder/cats-200x300-8.jpg',
+    const avatars = [
         'https://cdn.framework7.io/placeholder/cats-400x300-9.jpg',
         'https://cdn.framework7.io/placeholder/cats-300x150-10.jpg',
+        'https://cdn.framework7.io/placeholder/people-100x100-9.jpg',
+        'https://cdn.framework7.io/placeholder/people-100x100-7.jpg',
+        'https://cdn.framework7.io/placeholder/cats-200x260-4.jpg',
     ];
     const people = [
         {
@@ -53,6 +49,7 @@ export function Chat() {
         'Need to think about it',
         'Amazing!!!',
     ];
+    const { SignalRContext } = useSignalR();
     const [typingMessage, setTypingMessage] = useState(null);
     const [messageText, setMessageText] = useState('');
     const [messagesData, setMessagesData] = useState([
@@ -110,6 +107,7 @@ export function Chat() {
 
     const responseInProgress = useRef(false);
     const messagebar = useRef(null);
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         f7ready(() => {
@@ -146,14 +144,17 @@ export function Chat() {
         const messagesToSend = [];
         if (text.length) {
             messagesToSend.push({
+                type:'sent',
                 text,
             });
         }
         if (messagesToSend.length === 0) {
             return;
         }
-        setMessagesData([...messagesData, ...messagesToSend]);
+        SignalRContext.invoke('SendMessage', text);
+        setMessagesData([...messagesData, ...messagesToSend]);       
         setMessageText('');
+        
 
         // Focus area
         if (text.length) messagebar.current.focus();
@@ -163,79 +164,109 @@ export function Chat() {
 
         responseInProgress.current = true;
 
+    };
+
+    SignalRContext.useSignalREffect('ReceiveMessage', (player, message) => {
+        const messagesToSend = [];
+        if (message.length) {
+            messagesToSend.push({
+                text: message,
+                type: 'received',
+                name: player.username,
+                avatar: player.picture 
+            });
+        }
+        if (messagesToSend.length === 0) {
+            return;
+        }
+
         setTimeout(() => {
-            const answer = answers[Math.floor(Math.random() * answers.length)];
-            const person = people[Math.floor(Math.random() * people.length)];
             setTypingMessage({
-                name: person.name,
-                avatar: person.avatar,
+                name: player.username,
+                avatar: player.picture,
             });
             setTimeout(() => {
                 setTypingMessage(null);
                 setMessagesData([
                     ...messagesData,
-                    ...messagesToSend,
                     {
-                        text: answer,
+                        text: message,
                         type: 'received',
-                        name: person.name,
-                        avatar: person.avatar,
+                        name: player.username,
+                        avatar: player.picture
                     },
                 ]);
-                responseInProgress.current = false;
-            }, 4000);
+            }, 1000);
         }, 1000);
-    };
+
+    }, [setMessagesData]);
+
+    // Scroll to bottom of messages when messagesData updates
+    useEffect(() => {
+        messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }, [messagesData]);
+
+    const currentDate = new Date();
+
+    // Define months array for month names
+    const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    // Format date and time string
+    const formattedDate = `${months[currentDate.getMonth()]} ${currentDate.getDate()}, ${currentDate.getFullYear()}`;
 
     return (
         <Popup className='chatPopup' swipeToClose>
             <Page>
             {/* <Navbar title="Messages"></Navbar> */}
 
-            <Messages>
-                <MessagesTitle>
-                    <b>Sunday, Feb 9,</b> 12:58
-                </MessagesTitle>
+                <Messages>
+                    <MessagesTitle>
+                            <b>{formattedDate}</b>
+                    </MessagesTitle>
 
-                {messagesData.map((message, index) => (
-                    <Message
-                        key={index}
-                        type={message.type}
-                        image={message.image}
-                        name={message.name}
-                        avatar={message.avatar}
-                        first={isFirstMessage(message, index)}
-                        last={isLastMessage(message, index)}
-                        tail={isTailMessage(message, index)}
-                    >
-                        {message.text && (
-                            <span slot="text" dangerouslySetInnerHTML={{ __html: message.text }} />
-                        )}
-                    </Message>
-                ))}
-                {typingMessage && (
-                    <Message
-                        type="received"
-                        typing={true}
-                        first={true}
-                        last={true}
-                        tail={true}
-                        header={`${typingMessage.name} is typing`}
-                        avatar={typingMessage.avatar}
+                    {messagesData.map((message, index) => (
+                        <Message
+                            key={index}
+                            type={message.type}
+                            image={message.image}
+                            name={message.name}
+                            avatar={message.avatar}
+                            first={isFirstMessage(message, index)}
+                            last={isLastMessage(message, index)}
+                            tail={isTailMessage(message, index)}
+                        >
+                            {message.text && (
+                                <span slot="text" dangerouslySetInnerHTML={{ __html: message.text }} />
+                            )}
+                        </Message>
+                    ))}
+                    {typingMessage && (
+                        <Message
+                            type="received"
+                            typing={true}
+                            first={true}
+                            last={true}
+                            tail={true}
+                            header={`${typingMessage.name} is typing`}
+                            avatar={typingMessage.avatar}
+                        />
+                    )}
+                    <div ref={messagesEndRef} />
+                </Messages>
+
+                <Messagebar style={{ paddingLeft: 13 }}
+                    value={messageText}
+                    onInput={(e) => setMessageText(e.target.value)}
+                >
+                    <Link
+                        iconIos="f7:arrow_up_circle_fill"
+                        iconMd="material:send"
+                        slot="inner-end"
+                        onClick={sendMessage}
                     />
-                )}
-            </Messages>
-
-            <Messagebar
-                value={messageText}
-                onInput={(e) => setMessageText(e.target.value)}
-            >
-                <Link
-                    iconIos="f7:arrow_up_circle_fill"
-                    iconMd="material:send"
-                    slot="inner-end"
-                    onClick={sendMessage}
-                />
                 </Messagebar>
                 
             </Page>
