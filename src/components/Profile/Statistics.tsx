@@ -17,19 +17,19 @@ export function Statistics({ statistics }: IStatisticsProps) {
         </ListItem>
         <ListItem>
           <div slot="title">{t('Profile.GamesPlayed')}</div>
-          <div slot="after">{statistics.gamesPlayed}</div>
+          <div slot="after">{statistics?.gamesPlayed}</div>
         </ListItem>
         <ListItem>
           <div slot="title">{t('Profile.Wins')}</div>
-          <div slot="after">{statistics.wins}</div>
+          <div slot="after">{statistics?.wins}</div>
         </ListItem>
         <ListItem>
           <div slot="title">{t('Profile.Losses')}</div>
-          <div slot="after">{statistics.losses}</div>
+          <div slot="after">{statistics?.losses}</div>
         </ListItem>
         <ListItem>
           <div slot="title">{t('Profile.Draws')}</div>
-          <div slot="after">{statistics.draws}</div>
+          <div slot="after">{statistics?.draws}</div>
         </ListItem>
       </List>
 
@@ -38,17 +38,17 @@ export function Statistics({ statistics }: IStatisticsProps) {
         tooltip
         datasets={[
           {
-            value: statistics.wins,
+            value: statistics?.wins,
             color: 'green',
             label: t('Profile.Wins'),
           },
           {
-            value: statistics.losses,
+            value: statistics?.losses,
             color: 'red',
             label: t('Profile.Losses'),
           },
           {
-            value: statistics.draws,
+            value: statistics?.draws,
             color: 'gray',
             label: t('Profile.Draws'),
           }
