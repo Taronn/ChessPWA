@@ -8,45 +8,51 @@ import {
   PageContent,
   Sheet,
 } from 'framework7-react';
-import { IInvite,IPlayer } from './types';
+import { IInvite, IPlayer } from './types';
 import { useTranslation } from 'react-i18next';
 import { PlayerInfo } from './PlayerInfo';
 import { useSignalR } from '../../hooks/useSignalR';
-import { useState } from 'react';
-interface ISendInviteModalProps {
-  player: IPlayer;
-}
+import { useState,useEffect } from 'react';
 
-export function ReceiveInviteModal({player }: ISendInviteModalProps) {
+export function ReceiveInviteModal(){
   const { t } = useTranslation();
   const { SignalRContext } = useSignalR();
-  const [invite, setInvite] = useState<IInvite>();
+  const [invite, setInvite] = useState<IInvite>({} as IInvite);
   const [opened, setOpened] = useState(false);
+  const player: IPlayer = {
+    country: "Armenia",
+    username: "Gago",
+  }
+  // const [from, setFrom] = useState<IPlayer>({} as IPlayer);
+
+  // useEffect(() => {
+  //   setOpened(true);
+  // }, [invite]);
 
   function rejectedInvite() {
-    SignalRContext.invoke('InviteRejected', player.id,player.username);
-    console.log(player.username);
+    SignalRContext.invoke('RejectInvite');
     setOpened(false);
   }
+
   SignalRContext.useSignalREffect('InviteReceived', (newInvite) => {
     console.log(newInvite);
-    setInvite(newInvite);
     setOpened(true);
+    setInvite(newInvite);
+    // setFrom(newInvite.from);
   }, [setInvite]);
   
   return (
     <Sheet style={{ height: 'auto' }} swipeToClose opened={opened}
-           onSheetClosed={() => setOpened(false)}>
+           onSheetClosed={() => setOpened(false)} >
       <PageContent>
         <BlockTitle medium className="display-flex justify-content-space-between margin-top">
-          {/* <PlayerInfo player={invite?.from??{}} initialTime={invite?.timer??0} /> */}
+          <PlayerInfo player={player} initialTime={invite.timer} />
           <div className="grid grid-cols-2 grid-gap">
             <Button fill round onClick={() => rejectedInvite()} iconIos="f7:xmark" iconMd="material:close"
                     className="padding" color="red" />
             <Button fill round onClick={() => setOpened(false) } iconIos="f7:checkmark" iconMd="material:check"
                     className="padding" />
           </div>
-
         </BlockTitle>
         <Block>
           <List className="no-margin">

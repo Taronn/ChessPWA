@@ -3,11 +3,12 @@ import { List, ListItem, Searchbar } from 'framework7-react';
 import { PlayersListItem } from './PlayersListItem';
 import { useSignalR } from '../../hooks/useSignalR';
 import { useTranslation } from 'react-i18next';
+import { IPlayer } from '../Shared/types';
 
 export function PlayersList() {
   const { t } = useTranslation();
   const { SignalRContext } = useSignalR();
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<IPlayer[]>([]);
 
   SignalRContext.useSignalREffect('GetPlayersList', (newPlayers) => {
     setPlayers(newPlayers);

@@ -32,9 +32,11 @@ export interface IPlayer {
 }
 
 export interface IInvite {
+  fromId:string
   from: IPlayer
-  fromColor: Color
+  toId:string
   to: IPlayer
+  fromColor: Color
   toColor: Color
   timer: number
   timerIncrement: number

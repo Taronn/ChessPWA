@@ -11,12 +11,13 @@ import {
   Segmented,
   Sheet,
 } from 'framework7-react';
-import { IInvite, IPlayer } from './types';
+import { IPlayer } from './types';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';
 import { PlayerInfo } from './PlayerInfo';
 import { Color } from './constants';
 import { useSignalR } from '../../hooks/useSignalR';
+
 interface ISendInviteModalProps {
   opened: boolean;
   setOpened: (opened: boolean) => void;
@@ -31,15 +32,15 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
   const [color, setColor] = useState(Color.WHITE);
   const [message, setMessage] = useState("");
 
-  const invite: IInvite = {
-    fromColor: color,
-    timer: initialTime,
-    timerIncrement: bonusTime,
-    message:message
-  }
-
   function sendInvite() {
-    SignalRContext.invoke('InvitePlayer', player.id, invite);
+    const invite = {
+      toId: player.id,
+      fromColor: color,
+      timer: initialTime,
+      timerIncrement: bonusTime,
+      message: message
+    }
+    SignalRContext.invoke('InvitePlayer', invite);
     console.log(invite);
     setOpened(false);
   }
