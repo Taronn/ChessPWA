@@ -17,13 +17,12 @@ import { useState } from 'react';
 import { PlayerInfo } from './PlayerInfo';
 import { Color } from './constants';
 import { useSignalR } from '../../hooks/useSignalR';
+
 interface ISendInviteModalProps {
   opened: boolean;
   setOpened: (opened: boolean) => void;
   player: IPlayer;
 }
-
-
 
 export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalProps) {
   const { t } = useTranslation();
@@ -31,9 +30,19 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
   const [initialTime, setInitialTime] = useState(15);
   const [bonusTime, setBonusTime] = useState(5);
   const [color, setColor] = useState(Color.WHITE);
-  
-  function InviteSend(message) {
-    SignalRContext.invoke('InvitePlayer', message);
+  const [message, setMessage] = useState("");
+
+  function sendInvite() {
+    const invite = {
+      toId: player.id,
+      fromColor: color,
+      timer: initialTime,
+      timerIncrement: bonusTime,
+      message: message
+    }
+    SignalRContext.invoke('InvitePlayer', invite);
+    console.log(invite);
+    setOpened(false);
   }
 
   return (
@@ -43,7 +52,7 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
         <BlockTitle medium className="display-flex justify-content-space-between">
           <PlayerInfo player={player} initialTime={initialTime} />
           <div>
-            <Button fill round onClick={() => { InviteSend(player.id); setOpened(false)}} iconMaterial="send"
+            <Button fill round onClick={() => { sendInvite();}} iconMaterial="send"
                     className="float-right padding" />
           </div>
         </BlockTitle>
@@ -89,6 +98,8 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
 
           <List className="no-margin">
             <ListInput type="textarea"
+                       value={message}
+                       onChange={(text) => setMessage(text.target.value)}
                        placeholder={t('Common.Message')}
                        resizable outline maxlength={50} />
           </List>

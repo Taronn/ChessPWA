@@ -17,8 +17,7 @@ import hy from 'i18n-iso-countries/langs/hy.json';
 import { useEnvVars } from '../hooks/useEnvVars';
 import { useSignalR } from '../hooks/useSignalR';
 import { ReceiveInviteModal } from './Shared/ReceiveInviteModal';
-import { IInvite } from './Shared/types';
-import { Color, GameType, Languages, Themes } from './Shared/constants';
+import { Languages, Themes } from './Shared/constants';
 
 const MyApp = () => {
   const {dotnetURL} = useEnvVars();
@@ -86,49 +85,6 @@ const MyApp = () => {
     height: '100vh',
   };
 
-  const invite: IInvite = {
-    from: {
-      username: 'test',
-      country: 'am',
-      statistics: [
-        {
-          rating: 1500,
-          type: GameType.RAPID,
-        },
-        {
-          rating: 1500,
-          type: GameType.BLITZ,
-        },
-        {
-          rating: 1500,
-          type: GameType.BULLET,
-        }
-      ],
-    },
-    fromColor: Color.WHITE,
-    to:{
-      username: 'test111111111',
-      country: 'am',
-      statistics: [
-        {
-          rating: 1500,
-          type: GameType.RAPID,
-        },
-        {
-          rating: 1500,
-          type: GameType.BLITZ,
-        },
-        {
-          rating: 1500,
-          type: GameType.BULLET,
-        }
-      ],
-    },
-    toColor: Color.BLACK,
-    initialTime: 30,
-    bonusTime: 5,
-  }
-
   return (
     <>
       {loading ? (
@@ -150,7 +106,7 @@ const MyApp = () => {
               url="/play"
             />
 
-            <ReceiveInviteModal opened={false} setOpened={()=>console.log('')} invite={invite}/>
+            <ReceiveInviteModal/>
           </App>
         </SignalRContext.Provider>
       )}

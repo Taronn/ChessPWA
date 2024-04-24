@@ -15,6 +15,7 @@ export interface IUser {
 }
 
 export interface IStatistic {
+  id: string
   type: GameType
   rating: number
   gamesPlayed: number
@@ -32,10 +33,13 @@ export interface IPlayer {
 }
 
 export interface IInvite {
+  fromId:string
   from: IPlayer
-  fromColor: Color
+  toId:string
   to: IPlayer
+  fromColor: Color
   toColor: Color
-  initialTime: number
-  bonusTime: number
+  timer: number
+  timerIncrement: number
+  message:string
 }

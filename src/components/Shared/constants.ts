@@ -5,8 +5,8 @@ export enum GameType {
 }
 
 export enum Color {
-  WHITE = 'white',
-  BLACK = 'black',
+  WHITE = 1,
+  BLACK = 2,
 }
 
 export enum Theme {

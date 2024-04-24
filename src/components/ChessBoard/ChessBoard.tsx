@@ -9,7 +9,6 @@ import { PlayerInfoPanel } from './PlayerInfoPanel';
 export function ChessBoard() {
   const size = Math.min(window.innerWidth - 45, window.innerHeight - 320);
   const { SignalRContext } = useSignalR();
-
   const player = {
     username: 'test',
     country: 'am',
@@ -34,6 +33,17 @@ export function ChessBoard() {
   const board = useRef<any>();
   let pgn;
   let pendingMove = null;
+
+  SignalRContext.useSignalREffect('StartGame', (game) => {
+    console.log("game");
+    // location.replace("/tabs/chess");
+    // f7.views.main.router.navigate('/tabs/chess/');
+    console.log(game);
+  }, []);
+
+  SignalRContext.useSignalREffect('GameStarted', (game) => {
+    console.log("games");
+  }, []);
 
   SignalRContext.useSignalREffect('MakeMove', (from, to) => {
     console.log('MakeMove', from, to);
