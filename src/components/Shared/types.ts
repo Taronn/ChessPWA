@@ -15,6 +15,7 @@ export interface IUser {
 }
 
 export interface IStatistic {
+  id: string
   type: GameType
   rating: number
   gamesPlayed: number

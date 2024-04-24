@@ -14,16 +14,16 @@ export function PlayerInfo({player, initialTime} : IPlayerInfoProps) {
   const {i18n} = useTranslation();
   const countryName = countries.getName(player.country, i18n.language);
 
-  // const playerStatistics = useMemo(() => player.statistics.find(stat => {
-  //     if (initialTime < 3) {
-  //       return stat.type === GameType.BULLET;
-  //     }
-  //     if (initialTime < 10) {
-  //       return stat.type === GameType.BLITZ;
-  //     }
-  //     return stat.type === GameType.RAPID;
-  //   })!
-  //   , [initialTime, player.statistics]);
+  const playerStatistics = useMemo(() => player.statistics.find(stat => {
+      if (initialTime < 3) {
+        return stat.type === GameType.BULLET;
+      }
+      if (initialTime < 10) {
+        return stat.type === GameType.BLITZ;
+      }
+      return stat.type === GameType.RAPID;
+    })!
+    , [initialTime, player.statistics]);
 
   return (
     <div className="display-flex align-items-center">
@@ -36,7 +36,7 @@ export function PlayerInfo({player, initialTime} : IPlayerInfoProps) {
           alt={player.country}
         />
       </Icon>
-      {/* <RatingChip statistic={playerStatistics} /> */}
+      <RatingChip statistic={playerStatistics} />
     </div>
   );
 }

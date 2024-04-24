@@ -5,6 +5,7 @@ import {
   Icon,
   List,
   ListItem,
+  Message,
   PageContent,
   Sheet,
 } from 'framework7-react';
@@ -19,38 +20,49 @@ export function ReceiveInviteModal(){
   const { SignalRContext } = useSignalR();
   const [invite, setInvite] = useState<IInvite>({} as IInvite);
   const [opened, setOpened] = useState(false);
-  const player: IPlayer = {
-    country: "Armenia",
-    username: "Gago",
-  }
+
+  // const player: IPlayer = {
+  //   country: "Armenia",
+  //   username: "Gago",
+  // }
   // const [from, setFrom] = useState<IPlayer>({} as IPlayer);
 
   // useEffect(() => {
   //   setOpened(true);
   // }, [invite]);
-
-  function rejectedInvite() {
-    SignalRContext.invoke('RejectInvite');
-    setOpened(false);
-  }
-
+  
   SignalRContext.useSignalREffect('InviteReceived', (newInvite) => {
     console.log(newInvite);
     setOpened(true);
     setInvite(newInvite);
     // setFrom(newInvite.from);
   }, [setInvite]);
+
+  function rejectedInvite() {
+    SignalRContext.invoke('RejectInvite');
+    setOpened(false);
+  }
+
+  function acceptedInvite() {
+    SignalRContext.invoke('AcceptInvite');
+    setOpened(false);
+  }
+
+  SignalRContext.useSignalREffect('InviteRejected', (newInvite) => {
+    console.log('newInvite');
+    console.log(newInvite);
+  }, []);
   
   return (
     <Sheet style={{ height: 'auto' }} swipeToClose opened={opened}
            onSheetClosed={() => setOpened(false)} >
       <PageContent>
         <BlockTitle medium className="display-flex justify-content-space-between margin-top">
-          <PlayerInfo player={player} initialTime={invite.timer} />
+          {/* <PlayerInfo player={invite.from} initialTime={invite.timer} /> */}
           <div className="grid grid-cols-2 grid-gap">
             <Button fill round onClick={() => rejectedInvite()} iconIos="f7:xmark" iconMd="material:close"
                     className="padding" color="red" />
-            <Button fill round onClick={() => setOpened(false) } iconIos="f7:checkmark" iconMd="material:check"
+            <Button fill round onClick={() => acceptedInvite() } iconIos="f7:checkmark" iconMd="material:check"
                     className="padding" />
           </div>
         </BlockTitle>
@@ -61,6 +73,8 @@ export function ReceiveInviteModal(){
               slot="media" className="material-icons-outlined" material="timer" /></ListItem>
             <ListItem title={t('InviteModal.BonusTime')} badge={`${invite?.timerIncrement} ${t('Common.Seconds')}`}><Icon
               slot="media" material="more_time" /></ListItem>
+            <ListItem title={t('Message')}>{invite?.message}<Icon
+              slot="media" material="message" /></ListItem>
           </List>
         </Block>
 
