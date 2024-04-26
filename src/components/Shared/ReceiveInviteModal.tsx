@@ -55,7 +55,7 @@ export function ReceiveInviteModal(){
   
   return (
     <Sheet style={{ height: 'auto' }} swipeToClose opened={opened}
-           onSheetClosed={() => setOpened(false)} >
+      onSheetClosed={() => rejectedInvite()} >
       <PageContent>
         <BlockTitle medium className="display-flex justify-content-space-between margin-top">
           {/* <PlayerInfo player={invite.from} initialTime={invite.timer} /> */}
