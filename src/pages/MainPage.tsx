@@ -1,4 +1,4 @@
-import { Button, Page, Tab, Tabs } from 'framework7-react';
+import { Page, Tab, Tabs } from 'framework7-react';
 import { NavBar } from '../components/Shared/NavBar';
 import { PlayersList } from '../components/PlayersList';
 import { MainToolbar } from '../components/MainToolbar';
@@ -28,9 +28,8 @@ export function MainPage() {
         <Tab id='chess' className="page-content" onTabShow={() => setTab('chess')}>
           <ChessBoard/>
         </Tab>
-        <Tab id='chat' className='page-content' onTabShow={() => setTab('chat')}>
+       <Tab id='chat' className='page-content' onTabShow={() => setTab('chat')}>
           <Chat/>
-          <Button popupOpen='.chatPopup'>Button</Button>
         </Tab>
         <Tab id='profile' className='page-content' onTabShow={() => setTab('profile')}>
           <Profile user={user}/>
