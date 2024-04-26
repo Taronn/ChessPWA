@@ -25,13 +25,6 @@ export function MainToolbar() {
         iconIos="f7:gamecontroller_fill"
       />
       <Link
-        href="chat/"
-        routeTabId="chat"
-        tabLink="#chat"
-        iconIos="f7:chat_bubble_2_fill"
-        iconMd="material:chat"
-      />
-      <Link
         href="profile/"
         routeTabId="profile"
         tabLink="#profile"

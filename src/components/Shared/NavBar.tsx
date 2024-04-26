@@ -68,7 +68,8 @@ export function NavBar({ activeTab }) {
             iconColor={iconColor}
             iconF7="paperplane_fill"
             iconOnly
-            href={'/login'}
+            popupOpen='.chatPopup'
+            href={'/#'}
           ></Link>)}
       </NavRight>
       <Popover className="popover-settings">
