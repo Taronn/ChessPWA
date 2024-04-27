@@ -5,30 +5,39 @@ import { useEffect, useRef, useState } from 'react';
 import { useSignalR } from '../../hooks/useSignalR';
 import { f7 } from 'framework7-react';
 import { PlayerInfoPanel } from './PlayerInfoPanel';
+import { IPlayer } from '../Shared/types';
 
-export function ChessBoard() {
+
+interface IGame {
+  player: IPlayer,
+}
+
+export function ChessBoard({f7route}) {
   const size = Math.min(window.innerWidth - 45, window.innerHeight - 320);
   const { SignalRContext } = useSignalR();
-  const player = {
-    username: 'test',
-    country: 'am',
-    color: Color.WHITE,
-    statistics: [
-      {
-        rating: 1500,
-        type: GameType.RAPID,
-      },
-      {
-        rating: 1500,
-        type: GameType.BLITZ,
-      },
-      {
-        rating: 1500,
-        type: GameType.BULLET,
-      },
-    ],
-  };
+  // const player = {
+  //   username: 'test',
+  //   country: 'am',
+  //   color: Color.WHITE,
+  //   statistics: [
+  //     {
+  //       rating: 1500,
+  //       type: GameType.RAPID,
+  //     },
+  //     {
+  //       rating: 1500,
+  //       type: GameType.BLITZ,
+  //     },
+  //     {
+  //       rating: 1500,
+  //       type: GameType.BULLET,
+  //     },
+  //   ],
+  // };
 
+  const [game, setGame] = useState<IGame>({} as IGame);
+  const { player } = game;
+ 
   const [chess, setChess] = useState({ game: new Chess() });
   const board = useRef<any>();
   let pgn;
@@ -36,10 +45,10 @@ export function ChessBoard() {
 
   SignalRContext.useSignalREffect('StartGame', (game) => {
     console.log("game");
-    // location.replace("/tabs/chess");
-    // f7.views.main.router.navigate('/tabs/chess/');
+    f7.views.main.router.navigate('/tabs/chess');
     console.log(game);
-  }, []);
+    setGame(game);
+  }, [setGame]);
 
   SignalRContext.useSignalREffect('GameStarted', (game) => {
     console.log("games");
@@ -95,9 +104,9 @@ export function ChessBoard() {
     // do not pick up pieces if the game is over
     if (chess.game.isGameOver()) return false;
 
-    if (player.color[0] !== chess.game.turn()) {
-      return false;
-    }
+    // if (player.color[0] !== chess.game.turn()) {
+    //   return false;
+    // }
 
     // get list of possible moves for this square
     const legalMoves = chess.game.moves({
