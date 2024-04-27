@@ -12,17 +12,17 @@ interface IPlayersListItemProps {
   showRating?: boolean;
 }
 
-export function PlayersListItem({slot, player, showRating = true}: IPlayersListItemProps) {
+export function PlayersListItem({slot, player, showRating = true, isRenderedByChatSelector = false}: IPlayersListItemProps) {
   const {t, i18n} = useTranslation();
   const [showSendInviteModal, setShowSendInviteModal] = useState(false);
   const maxStat = player.statistics.reduce((max, stat) => (stat.rating > max.rating) ? stat : max, player.statistics[0]);
   const countryName = countries.getName(player.country, i18n.language);
 
     return (
-      <ListItem swipeout title={player.username} slot={slot}>
+      <ListItem swipeout link={isRenderedByChatSelector} title={player.username} slot={slot} popupOpen={isRenderedByChatSelector && '.chatPopup'}>
         <Icon slot="media" ios="f7:person" md="material:person"/>
         <Icon slot='after-title' className='margin-left-half' tooltip={countryName} tooltipTrigger="click">
-          <img
+         <img
             src={`https://flagcdn.com/${player.country}.svg`}
             width="24"
             alt={player.country}

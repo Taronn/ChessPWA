@@ -23,7 +23,8 @@
         "Friends": "Ընկերներ",
         "NothingFound": "Ոչինչ չի գտնվել",
         "Settings": "Կարգավորումներ",
-        "LogOut": "Դուրս գալ"
+        "LogOut": "Դուրս գալ",
+        "GlobalChat": "Չաթ բոլորի հետ"
     },
     "SignIn": {
         "UsernamePlaceholder": "Մուտքագրեք ձեր օգտանունը",

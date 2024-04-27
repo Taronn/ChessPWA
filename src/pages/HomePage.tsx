@@ -2,12 +2,28 @@ import { Page, Link, Block, Card, CardContent, Button } from 'framework7-react';
 import { NavBar } from '../components/Shared/NavBar';
 
 export function HomePage() {
-  return (
+
+    const imageStyle = {
+        width:"100%",
+        maxHeight: "80vh"
+    };
+    const footer = {
+        position: "fixed",
+        bottom: "0",
+        left: "0",
+        width: "100%"
+    }
+
+
+return (
     <Page name="home">
       <NavBar />
       <Block>
+        <img style={imageStyle} src="https://wallpapercave.com/wp/wp2883270.jpg"></img>
         <Button text='Play' href='tabs/players' raised fill/>
-        <p>
+      </Block>
+      <Block style={footer}>
+      <p>
           This is a boilerplate project for building Chess PWA with Framework7
           and React
         </p>
