@@ -11,7 +11,6 @@ export default async () => {
   return  {
     plugins: [
       react(),
-
     ],
     root: SRC_DIR,
     base: '',

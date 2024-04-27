@@ -14,6 +14,9 @@ import 'framework7/css/bundle';
 // Import Icons and App Custom Styles
 import '../css/icons.css';
 import '../css/app.css';
+import 'material-icons/iconfont/material-icons.css';
+import '@chrisoakman/chessboard2/dist/chessboard2.min.css';
+
 
 // Import App Component
 import App from '../components/app';
@@ -26,4 +29,5 @@ import { store } from '../redux/store';
 
 // Mount React App
 const root = createRoot(document.getElementById('app')!);
+// @ts-expect-error - //
 root.render(React.createElement(Provider, { store }, React.createElement(App)));

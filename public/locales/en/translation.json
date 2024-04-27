@@ -1,30 +1,92 @@
 {
-    "Common":{
-        "Username": "Username",
-        "Password": "Password",
-        "Email": "Email",
-        "SignIn": "Sign In",
-        "SignUp": "Sign Up"
-    },
-   
-    "SignIn": {
-        "UsernamePlaceholder": "Enter your username",
-        "PasswordPlaceholder": "Enter your password",
-        "ForgotPassword": "Forgot Password?",
-        "DontHaveAccount": "Don't have an account?"
-    },
-    "SignUp": {
-        "UsernamePlaceholder": "lowercase, numbers, _, and . allowed",
-        "PasswordPlaceholder": "8+ chars, number, uppercase",
-        "ConfirmPassword": "Confirm Password",
-        "RepeatPassword": "Repeat password",
-        "AlreadyHaveAccount": "Already have an account?",
-        "LogInWith": "Log in with"
-    },
-    "Settings": {
-        "ThemeChanged": "Theme Changed",
-        "PleaseRestart": "Please restart the app",
-        "DarkMode": "Dark Mode",
-        "LightMode": "Light Mode"
-    }
+  "Common": {
+    "Username": "Username",
+    "Password": "Password",
+    "Email": "Email",
+    "SignIn": "Sign In",
+    "SignUp": "Sign Up",
+    "Ok": "Ok",
+    "Cancel": "Cancel",
+    "VerifyEmail": "Verify Email",
+    "VerifyEmailMessage": "Enter the verification code sent to {{email}}",
+    "Verify": "Verify",
+    "EmailVerified": "Email Verified",
+    "Minutes": "minutes",
+    "Seconds": "seconds",
+    "Message": "Message",
+    "Color": "Color",
+    "White": "White",
+    "white": "White",
+    "Black": "Black",
+    "black": "Black",
+    "Search": "Search",
+    "Friends": "Friends",
+    "NothingFound": "Nothing found",
+    "Settings": "Settings",
+    "LogOut": "Log out"
+  },
+  "SignIn": {
+    "UsernamePlaceholder": "Enter your username",
+    "PasswordPlaceholder": "Enter your password",
+    "ForgotPassword": "Forgot Password?",
+    "DontHaveAccount": "Don't have an account?",
+    "ResetPassword": "Reset Password",
+    "ResetPasswordMessage": "Code has been sent to email {{email}}",
+    "ResetPasswordSuccess": "Password reset successful",
+    "NewPassword": "New Password"
+  },
+  "SignUp": {
+    "UsernamePlaceholder": "lowercase, numbers, _, and . allowed",
+    "PasswordPlaceholder": "8+ chars, number, uppercase",
+    "ConfirmPassword": "Confirm Password",
+    "RepeatPassword": "Repeat password",
+    "AlreadyHaveAccount": "Already have an account?",
+    "LogInWith": "Log in with"
+  },
+  "Settings": {
+    "ThemeChanged": "Theme Changed",
+    "PleaseRestart": "Please restart the app",
+    "DarkMode": "Dark Mode",
+    "LightMode": "Light Mode"
+  },
+  "PlayersList": {
+    "Remove": "Remove",
+    "RemoveMessage": "{{username}} will be removed from the list",
+    "Play": "Play"
+  },
+  "InviteModal": {
+    "InitialTime": "Initial Time",
+    "BonusTime": "Bonus Time"
+  },
+  "Chess": {
+    "Draw": "Draw",
+    "Resign": "Resign"
+  },
+  "Profile": {
+    "Rating": "Rating",
+    "GamesPlayed": "Games Played",
+    "Wins": "Wins",
+    "Losses": "Losses",
+    "Draws": "Draws",
+    "EditProfile": "Edit Profile",
+    "ShareProfile": "Share Profile"
+  },
+  "Errors": {
+    "EMAIL_INVALID": "Please enter a valid email",
+    "USERNAME_INVALID": "Username must contain only lowercase, numbers, _, and .",
+    "USERNAME_LENGTH": "Username must be at least 5 characters",
+    "PASSWORD_WEAK": "Password must be at least 8 characters, contain at least one uppercase, and one number",
+    "PASSWORD_MIN_LENGTH": "Password must be at least 8 characters",
+    "PASSWORD_UPPERCASE": "Password must contain at least one uppercase",
+    "PASSWORD_NUMBER": "Password must contain at least one number",
+    "PASSWORD_LOWERCASE": "Password must contain at least one lowercase",
+    "PASSWORD_NOT_MATCH": "Passwords do not match",
+    "USERNAME_EXISTS": "Username already taken",
+    "EMAIL_EXISTS": "Email already exists",
+    "TOKEN_WRONG": "Verfification code is wrong",
+    "EMAIL_ALREADY_VERIFIED": "Email already verified",
+    "USERNAME_WRONG": "User with this username does not exist",
+    "PASSWORD_WRONG": "Password is wrong",
+    "EMAIL_NOT_VERIFIED": "Email is not verified"
+  }
 }

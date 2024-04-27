@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { f7, f7ready } from 'framework7-react';
+import { f7ready } from 'framework7-react';
 
 const initialState = {
   darkMode: false,
@@ -32,7 +32,6 @@ export const appSettingsSlice = createSlice({
       state.colorTheme = { hex: payload };
     },
   },
-  extraReducers: (builder) => {},
 });
 
 export const selectDarkMode = (state) => state.appSettings.darkMode;

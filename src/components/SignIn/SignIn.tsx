@@ -10,14 +10,61 @@ import {
 } from 'framework7-react';
 import { useCallback, useMemo, useState } from 'react';
 import { validatePassword, validateUsername } from '../../utils/validation';
-import { SocialLoginButtons } from '../SocialLoginButtons';
-import { LogoLink } from '../LogoLink';
+import { SocialLoginButtons } from '../Shared/SocialLoginButtons';
+import { LogoLink } from '../Shared/LogoLink';
 import { useTranslation } from 'react-i18next';
+import { useIsnFetch } from '../../hooks/useFetch';
+import { verifyEmail } from '../../utils/emailVerification';
+import { CachePolicies } from 'use-http';
+import { handleErrorMessage } from '../../utils/handleErrorMessage';
+import { resetPassword } from '../../utils/resetPassword';
 
 export function SignIn() {
   const { t } = useTranslation();
+  const { post: postSignin, response: signinResponse, loading: signinLoading } = useIsnFetch('/auth/signin', {
+    cachePolicy: CachePolicies.NO_CACHE,
+  });
+  const { patch: patchForgotPassword, response: forgotPasswordResponse } = useIsnFetch('/auth/forgot-password');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const submit = useCallback(
+    async (e) => {
+      e.preventDefault();
+      await postSignin({
+        Username: username,
+        Password: password,
+      });
+      if (signinResponse.ok) {
+        const { accessToken, refreshToken } = signinResponse.data;
+        f7.view.main.router.navigate(`/auth-success/${accessToken}/${refreshToken}`);
+      } else {
+        const {errorCode, message} = handleErrorMessage(signinResponse);
+        f7.dialog.alert(message, '', () => {
+          if (errorCode === 'EMAIL_NOT_VERIFIED') {
+            verifyEmail(username, username);
+          }
+        });
+      }
+    },
+    [username, password, postSignin, signinResponse]
+  );
+
+  const forgotPassword = useCallback(
+      async () => {
+        const message = validateUsername(username);
+        if (message) {
+          return f7.dialog.alert(message, '');
+        }
+        await patchForgotPassword({ Username: username });
+        if (forgotPasswordResponse.ok) {
+          resetPassword(forgotPasswordResponse.data, username);
+        } else {
+          const { message} = handleErrorMessage(forgotPasswordResponse);
+          f7.dialog.alert(message, '');
+        }
+      },[forgotPasswordResponse, patchForgotPassword, username]
+  );
 
   const handleUsernameChange = useCallback((e) => {
     const username = e.target.value;
@@ -49,6 +96,7 @@ export function SignIn() {
           label={t('Common.Username')}
           type="text"
           placeholder={t('SignIn.UsernamePlaceholder')}
+          autocapitalize="none"
           value={username}
           floatingLabel
           validate
@@ -74,15 +122,23 @@ export function SignIn() {
 
         <div className="display-flex justify-content-space-between margin-top">
           <div className="display-flex margin-left">
-            <Button fill>{t('Common.SignIn')}</Button>
+            <Button
+              fill
+              loading={signinLoading}
+              onClick={submit}
+              type={'submit'}
+              disabled={!username || !password}
+            >
+              {t('Common.SignIn')}
+            </Button>
           </div>
           <div className="display-flex margin-right">
-            <a>{t('SignIn.ForgotPassword')}</a>
+            <a onClick={forgotPassword}>{t('SignIn.ForgotPassword')}</a>
           </div>
         </div>
         <p className="margin-left">
           {t('SignIn.DontHaveAccount')}{' '}
-          <Link href="/signup" className="margin-left-half">
+          <Link href={"/signup"} className="margin-left-half">
             {t('Common.SignUp')}
           </Link>
         </p>
