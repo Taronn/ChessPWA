@@ -27,7 +27,7 @@ export function PlayerInfo({ player, initialTime }: IPlayerInfoProps) {
             return stat.type === GameType.RAPID;
           })
         : null,
-    [initialTime, player.statistics],
+    [initialTime, player],
   );
 
   return (
