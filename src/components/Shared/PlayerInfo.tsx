@@ -35,10 +35,10 @@ export function PlayerInfo({ player, initialTime }: IPlayerInfoProps) {
     <div className="display-flex align-items-center">
       <Icon ios="f7:person" md="material:person" className="margin-right-half display-flex" />
       <span className="display-flex" style={{ fontWeight: 'bold' }}>
-        {player.username}
+        {player?.username}
       </span>
       <Icon className="margin-horizontal-half display-flex" tooltip={countryName} tooltipTrigger="click">
-        <img src={`https://flagcdn.com/${player.country ?? 'am'}.svg`} width="24" alt={player.country} />
+        <img src={`https://flagcdn.com/${player?.country ?? 'am'}.svg`} width="24" alt={player?.country} />
       </Icon>
       {playerStatistics && <RatingChip statistic={playerStatistics} />}
     </div>
