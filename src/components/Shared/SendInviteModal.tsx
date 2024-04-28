@@ -52,7 +52,7 @@ export function SendInviteModal({ opened, setOpened, player }: ISendInviteModalP
         <BlockTitle medium className="display-flex justify-content-space-between">
           <PlayerInfo player={player} initialTime={initialTime} />
           <div>
-            <Button fill round onClick={() => { sendInvite();}} iconMaterial="send"
+            <Button fill round onClick={() => { sendInvite()}} iconMaterial="send"
                     className="float-right padding" />
           </div>
         </BlockTitle>
