@@ -1,6 +1,6 @@
 import { Chess } from 'chess.js';
 import { Chessboard2 } from '@chrisoakman/chessboard2/dist/chessboard2.min.mjs';
-import { Colors } from '../Shared/constants';
+import { Color, Colors } from '../Shared/constants';
 import { useEffect, useRef, useState } from 'react';
 import { useSignalR } from '../../hooks/useSignalR';
 import { f7 } from 'framework7-react';
@@ -25,7 +25,11 @@ export function ChessBoard() {
   SignalRContext.useSignalREffect(
     'SetGame',
     game => {
+      console.log('game')
+      console.log(game)
       const { whitePlayer, blackPlayer } = game;
+      whitePlayer.color = Color.WHITE;
+      blackPlayer.color = Color.BLACK;
       if (user.id === whitePlayer.id) {
         setPlayer(whitePlayer);
         setOpponent(blackPlayer);
@@ -79,10 +83,11 @@ export function ChessBoard() {
       onMousedownSquare,
       onTouchSquare,
     };
-
-    chess.game.loadPgn(game.pgn);
-    config.position = chess.game.fen();
-    setChess({ ...chess });
+    if (game?.pgn) {
+      chess.game.loadPgn(game.pgn);
+      config.position = chess.game.fen();
+      setChess({ ...chess });
+    }
     board.current = Chessboard2('chessboard', config);
   }, [game]);
 
@@ -94,6 +99,7 @@ export function ChessBoard() {
     // do not pick up pieces if the game is over
     if (chess.game.isGameOver()) return false;
 
+    console.log(player);
     if (Colors[player.color][0] !== chess.game.turn()) {
       return false;
     }
