@@ -16,15 +16,17 @@ export function PlayerInfo({ player, initialTime }: IPlayerInfoProps) {
 
   const playerStatistics = useMemo(
     () =>
-      player.statistics.find(stat => {
-        if (initialTime < 3) {
-          return stat.type === GameType.BULLET;
-        }
-        if (initialTime < 10) {
-          return stat.type === GameType.BLITZ;
-        }
-        return stat.type === GameType.RAPID;
-      })!,
+      player?.statistics
+        ? player.statistics.find(stat => {
+            if (initialTime < 3) {
+              return stat.type === GameType.BULLET;
+            }
+            if (initialTime < 10) {
+              return stat.type === GameType.BLITZ;
+            }
+            return stat.type === GameType.RAPID;
+          })
+        : null,
     [initialTime, player.statistics],
   );
 
@@ -37,7 +39,7 @@ export function PlayerInfo({ player, initialTime }: IPlayerInfoProps) {
       <Icon className="margin-horizontal-half display-flex" tooltip={countryName} tooltipTrigger="click">
         <img src={`https://flagcdn.com/${player.country ?? 'am'}.svg`} width="24" alt={player.country} />
       </Icon>
-      <RatingChip statistic={playerStatistics} />
+      {playerStatistics && <RatingChip statistic={playerStatistics} />}
     </div>
   );
 }
