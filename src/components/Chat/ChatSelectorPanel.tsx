@@ -10,7 +10,7 @@ export function ChatSelector(){
       <Page>
         <List noChevron dividersIos outline>
           <ListItem link title={t('Common.GlobalChat')} popupOpen='.chatPopup' ><Icon md="f7:chat_bubble_2" ios="f7:chat_bubble_2" slot='media'/></ListItem>
-          <ListItem link title={t('Common.AIChat')} popupOpen='.AiAssistant' ><Icon md="f7:chat_bubble_2" ios="f7:chat_bubble_2" slot='media'/></ListItem>
+          <ListItem link title={t('Common.AIChat')} popupOpen='.AiAssistant' ><Icon md="f7:quote_bubble" ios="f7:quote_bubble" slot='media'/></ListItem>
           <PlayersList isRenderedByChatSelector={true}/>
         </List>
       </Page>
