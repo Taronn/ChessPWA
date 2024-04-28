@@ -7,7 +7,7 @@ export function AuthSuccess({f7route}) {
     console.log('refreshToken', refreshToken);
     localStorage.setItem('accessToken', accessToken);
     localStorage.setItem('refreshToken', refreshToken);
-    location.href = location.origin + '/tabs/players';
+    location.href = location.origin + '/players';
     return (
         <Page name="auth-success">
         </Page>
