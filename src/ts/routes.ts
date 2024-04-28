@@ -1,7 +1,7 @@
 import { HomePage } from '../pages/HomePage';
 import { SignInPage } from '../pages/SignInPage';
 import { SignUpPage } from '../pages/SignUpPage';
-import {AuthSuccess} from "../pages/AuthSuccess";
+import { AuthSuccess } from '../pages/AuthSuccess';
 import { MainPage } from '../pages/MainPage';
 
 const routes = [
@@ -9,7 +9,7 @@ const routes = [
     name: 'home',
     path: '/',
     component: HomePage,
-    beforeEnter: function({ resolve, reject }) {
+    beforeEnter: function ({ resolve, reject }) {
       const isLoggedIn = localStorage.getItem('isLoggedin') === 'true';
       if (!isLoggedIn) {
         resolve();
@@ -34,7 +34,7 @@ const routes = [
     component: AuthSuccess,
   },
   {
-    path: '/tabs/',
+    path: '/',
     component: MainPage,
     tabs: [
       {
@@ -53,17 +53,12 @@ const routes = [
         id: 'chess',
       },
       {
-        name: 'chat',
-        path: '/chat',
-        id: 'chat',
-      },
-      {
         name: 'profile',
         path: '/profile',
         id: 'profile',
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 
 export default routes;

@@ -1,33 +1,22 @@
-import { Page, Link, Block, Card, CardContent, Button } from 'framework7-react';
+import { Page, Link, Block, Card, CardContent, Button, CardHeader } from 'framework7-react';
 import { NavBar } from '../components/Shared/NavBar';
+import { useTranslation } from 'react-i18next';
 
 export function HomePage() {
-
-    const imageStyle = {
-        width:"100%",
-        maxHeight: "80vh"
-    };
-    const footer = {
-        position: "fixed",
-        bottom: "0",
-        left: "0",
-        width: "100%"
-    }
-
-
-return (
+  const { t } = useTranslation();
+  return (
     <Page name="home">
       <NavBar />
       <Block>
-        <img style={imageStyle} src="https://wallpapercave.com/wp/wp2883270.jpg"></img>
-        <Button text='Play' href='tabs/players' raised fill/>
-      </Block>
-      <Block style={footer}>
-      <p>
-          This is a boilerplate project for building Chess PWA with Framework7
-          and React
-        </p>
+        <Button text={t('PlayersList.Play')} href={localStorage.getItem('isLoggedin') === 'true' ? 'players' : 'login'} raised fill />
+        <Block strong inset>
+          <p>Welcome to the Chess Game! This is a multiplayer chess game where you can play with your friends and other players around the world.</p>
+          <p>You can also chat with other players and see their profiles.</p>
+          <p>Enjoy the game!</p>
+        </Block>
+
         <Card>
+          <CardHeader>You can also follow us on social media</CardHeader>
           <CardContent className="display-flex justify-content-space-evenly">
             <Link iconF7="logo_instagram"></Link>
             <Link iconF7="logo_facebook"></Link>

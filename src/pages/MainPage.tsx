@@ -27,7 +27,7 @@ export function MainPage() {
           <Profile user={user}/>
         </Tab>
         <Tab id='chess' className="page-content" onTabShow={() => setTab('chess')}>
-          <ChessBoard/>
+          <ChessBoard/> 
         </Tab>
        <Tab id='chat' className='page-content' onTabShow={() => setTab('chat')}>
           <Chat/>
