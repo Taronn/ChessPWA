@@ -8,7 +8,7 @@ export function HomePage() {
     <Page name="home">
       <NavBar />
       <Block>
-        <Button text={t('PlayersList.Play')} href={localStorage.getItem('IsLoggedin') === 'true' ? 'players' : 'login'} raised fill />
+        <Button text={t('PlayersList.Play')} href={localStorage.getItem('isLoggedin') === 'true' ? 'players' : 'login'} raised fill />
         <Block strong inset>
           <p>Welcome to the Chess Game! This is a multiplayer chess game where you can play with your friends and other players around the world.</p>
           <p>You can also chat with other players and see their profiles.</p>
@@ -16,7 +16,7 @@ export function HomePage() {
         </Block>
 
         <Card>
-          <CardHeader>You can also follow us on social media:</CardHeader>
+          <CardHeader>You can also follow us on social media</CardHeader>
           <CardContent className="display-flex justify-content-space-evenly">
             <Link iconF7="logo_instagram"></Link>
             <Link iconF7="logo_facebook"></Link>

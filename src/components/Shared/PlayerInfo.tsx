@@ -31,7 +31,7 @@ export function PlayerInfo({player, initialTime} : IPlayerInfoProps) {
       <span className="display-flex" style={{fontWeight: 'bold'}}>{player.username}</span>
       <Icon className="margin-horizontal-half display-flex" tooltip={countryName} tooltipTrigger="click">
         <img
-          src={`https://flagcdn.com/${player.country}.svg`}
+          src={`https://flagcdn.com/${player.country ?? 'am'}.svg`}
           width="24"
           alt={player.country}
         />

@@ -38,3 +38,8 @@ export const ChessTypes = {
   2: 'Blitz',
   3: 'Bullet',
 };
+
+export const Colors = {
+  1: 'white',
+  2: 'black',
+};
