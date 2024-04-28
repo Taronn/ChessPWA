@@ -45,7 +45,7 @@ export function ChessBoard({f7route}) {
 
   SignalRContext.useSignalREffect('StartGame', (game) => {
     console.log("game");
-    f7.views.main.router.navigate('/tabs/chess');
+    f7.views.main.router.navigate('/chess');
     console.log(game);
     setGame(game);
   }, [setGame]);
