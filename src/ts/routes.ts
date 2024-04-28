@@ -53,11 +53,6 @@ const routes = [
         id: 'chess',
       },
       {
-        name: 'chat',
-        path: '/chat',
-        id: 'chat',
-      },
-      {
         name: 'profile',
         path: '/profile',
         id: 'profile',
