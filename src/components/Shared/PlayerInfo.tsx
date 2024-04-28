@@ -10,6 +10,7 @@ interface IPlayerInfoProps {
   player: IPlayer;
   initialTime: number;
 }
+
 export function PlayerInfo({ player, initialTime }: IPlayerInfoProps) {
   const { i18n } = useTranslation();
   const countryName = countries.getName(player?.country, i18n.language);
