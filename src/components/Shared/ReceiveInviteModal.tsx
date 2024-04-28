@@ -12,15 +12,18 @@ export function ReceiveInviteModal() {
   const [invite, setInvite] = useState<IInvite>({} as IInvite);
   const [opened, setOpened] = useState(false);
 
-  useEffect(() => {
-    setOpened(true);
-  }, [invite]);
+  // useEffect(() => {
+  //   if (invite!==null) {
+  //     setOpened(true);
+  //   }
+  // }, [invite]);
 
   SignalRContext.useSignalREffect(
     'InviteReceived',
     newInvite => {
       console.log(newInvite);
       setInvite(newInvite);
+      setOpened(true);
     },
     [setInvite],
   );
