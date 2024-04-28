@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { selectUser } from '../redux/slices/userSlice';
 import { useState } from 'react';
 import { Chat } from '../components/Chat/Chat';
+import { AiAssistant } from '../components/Chat/AiAssistant'
 
 
 export function MainPage() {
@@ -30,6 +31,9 @@ export function MainPage() {
         </Tab>
        <Tab id='chat' className='page-content' onTabShow={() => setTab('chat')}>
           <Chat/>
+        </Tab>
+        <Tab id='AiAssistant' className='page-content' onTabShow={() => setTab('AiAssistant')}>
+          <AiAssistant/>
         </Tab>
         <Tab id='profile' className='page-content' onTabShow={() => setTab('profile')}>
           <Profile user={user}/>
