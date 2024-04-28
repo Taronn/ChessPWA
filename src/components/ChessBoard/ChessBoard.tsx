@@ -1,73 +1,70 @@
 import { Chess } from 'chess.js';
 import { Chessboard2 } from '@chrisoakman/chessboard2/dist/chessboard2.min.mjs';
-import { Color, GameType } from '../Shared/constants';
+import { Colors } from '../Shared/constants';
 import { useEffect, useRef, useState } from 'react';
 import { useSignalR } from '../../hooks/useSignalR';
 import { f7 } from 'framework7-react';
 import { PlayerInfoPanel } from './PlayerInfoPanel';
-import { IPlayer } from '../Shared/types';
+import { IGame, IPlayer } from '../Shared/types';
+import { useSelector } from 'react-redux';
+import { selectUser } from '../../redux/slices/userSlice';
 
-
-interface IGame {
-  player: IPlayer,
-}
-
-export function ChessBoard({f7route}) {
+export function ChessBoard() {
   const size = Math.min(window.innerWidth - 45, window.innerHeight - 320);
   const { SignalRContext } = useSignalR();
-  // const player = {
-  //   username: 'test',
-  //   country: 'am',
-  //   color: Color.WHITE,
-  //   statistics: [
-  //     {
-  //       rating: 1500,
-  //       type: GameType.RAPID,
-  //     },
-  //     {
-  //       rating: 1500,
-  //       type: GameType.BLITZ,
-  //     },
-  //     {
-  //       rating: 1500,
-  //       type: GameType.BULLET,
-  //     },
-  //   ],
-  // };
 
   const [game, setGame] = useState<IGame>({} as IGame);
-  const { player } = game;
- 
+  const user = useSelector(selectUser);
+  const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
+  const [opponent, setOpponent] = useState<IPlayer>({} as IPlayer);
+
   const [chess, setChess] = useState({ game: new Chess() });
   const board = useRef<any>();
-  let pgn;
   let pendingMove = null;
 
-  SignalRContext.useSignalREffect('StartGame', (game) => {
-    console.log("game");
-    f7.views.main.router.navigate('/chess');
-    console.log(game);
-    setGame(game);
-  }, [setGame]);
+  SignalRContext.useSignalREffect(
+    'SetGame',
+    game => {
+      const { whitePlayer, blackPlayer } = game;
+      if (user.id === whitePlayer.id) {
+        setPlayer(whitePlayer);
+        setOpponent(blackPlayer);
+      } else {
+        setPlayer(blackPlayer);
+        setOpponent(whitePlayer);
+      }
+      setGame({ ...game });
+    },
+    [],
+  );
 
-  SignalRContext.useSignalREffect('GameStarted', (game) => {
-    console.log("games");
-  }, []);
+  SignalRContext.useSignalREffect(
+    'MakeMove',
+    (from, to) => {
+      console.log('MakeMove', from, to);
+      board.current.clearArrows();
+      board.current.addArrow({
+        color: 'orange',
+        start: from,
+        end: to,
+        opacity: 50,
+        size: 'small',
+      });
+      chess.game.move({ from: from, to: to, promotion: 'q' });
+      board.current.position(chess.game.fen());
+      setChess({ ...chess });
+    },
+    [chess],
+  );
 
-  SignalRContext.useSignalREffect('MakeMove', (from, to) => {
-    console.log('MakeMove', from, to);
-    board.current.clearArrows();
-    board.current.addArrow({
-      color: 'orange',
-      start: from,
-      end: to,
-      opacity: 50,
-      size: 'small',
+  useEffect(() => {
+    f7.on('tabShow', () => {
+      SignalRContext.invoke('GetGame');
     });
-    chess.game.move({ from: from, to: to, promotion: 'q' });
-    board.current.position(chess.game.fen());
-    setChess({ ...chess });
-  }, [chess]);
+    return () => {
+      f7.off('tabShow');
+    };
+  }, []);
 
   useEffect(() => {
     const config = {
@@ -82,21 +79,14 @@ export function ChessBoard({f7route}) {
       onMousedownSquare,
       onTouchSquare,
     };
-    if (pgn) {
-      chess.game.loadPgn(pgn);
-      config.position = chess.game.fen();
-      setChess({ ...chess });
-    }
-    f7.on('tabShow', () => board.current = Chessboard2('chessboard', config));
-    f7.on('', () => console.log(board.current));
-    return () => {
-      f7.off('tabShow');
-      f7.off('tabHide');
-    };
-  }, []);
 
-  const onTouchSquare = (square, piece, boardInfo) =>
-    onMousedownSquare({ square, piece });
+    chess.game.loadPgn(game.pgn);
+    config.position = chess.game.fen();
+    setChess({ ...chess });
+    board.current = Chessboard2('chessboard', config);
+  }, [game]);
+
+  const onTouchSquare = (square, piece, boardInfo) => onMousedownSquare({ square, piece });
 
   function onMousedownSquare({ square, piece }) {
     board.current.clearCircles();
@@ -104,9 +94,9 @@ export function ChessBoard({f7route}) {
     // do not pick up pieces if the game is over
     if (chess.game.isGameOver()) return false;
 
-    // if (player.color[0] !== chess.game.turn()) {
-    //   return false;
-    // }
+    if (Colors[player.color][0] !== chess.game.turn()) {
+      return false;
+    }
 
     // get list of possible moves for this square
     const legalMoves = chess.game.moves({
@@ -151,10 +141,10 @@ export function ChessBoard({f7route}) {
 
   return (
     <div className="display-flex justify-content-center margin-top">
-      <div style={{ width: size }} >
-        <PlayerInfoPanel player={player} initialTime={10} isOpponent={true} />
+      <div style={{ width: size }}>
+        {opponent && <PlayerInfoPanel player={opponent} initialTime={game.initialTime} isOpponent={true} />}
         <div id="chessboard" className="display-block" style={{ width: size, height: size }}></div>
-        <PlayerInfoPanel player={player} initialTime={10} />
+        {player && <PlayerInfoPanel player={player} initialTime={game.initialTime} />}
       </div>
     </div>
   );
