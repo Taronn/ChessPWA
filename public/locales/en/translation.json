@@ -23,7 +23,9 @@
     "Friends": "Friends",
     "NothingFound": "Nothing found",
     "Settings": "Settings",
-    "LogOut": "Log out"
+    "LogOut": "Log out",
+    "GlobalChat": "Global chat",
+    "AIChat":  "AI assistant"
   },
   "SignIn": {
     "UsernamePlaceholder": "Enter your username",

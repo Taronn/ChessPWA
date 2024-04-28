@@ -14,6 +14,7 @@ import { ThemeSelector } from './ThemeSelector';
 import { ColorPicker } from './ColorPicker';
 import { useSelector } from 'react-redux';
 import { selectDarkMode } from '../../redux/slices/appSettingsSlice';
+import { ChatSelector } from '../Chat/ChatSelectorPanel'
 
 export function NavBar({ activeTab }) {
   const darkMode = useSelector(selectDarkMode);
@@ -64,13 +65,15 @@ export function NavBar({ activeTab }) {
             ></Link>
           ) }
         {(isLoggedin && activeTab !== 'profile') && (
-          <Link
+         <> <Link
             iconColor={iconColor}
             iconF7="paperplane_fill"
             iconOnly
-            popupOpen='.chatPopup'
-            href={'/#'}
-          ></Link>)}
+            panelOpen='#chat-panel'            
+          ></Link>
+          <ChatSelector/>
+        </>)
+      }
       </NavRight>
       <Popover className="popover-settings">
         <List style={{ listStyleType: 'none' }} strong>
