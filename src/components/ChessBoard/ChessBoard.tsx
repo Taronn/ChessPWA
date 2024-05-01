@@ -42,6 +42,44 @@ export function ChessBoard() {
     [],
   );
 
+  SignalRContext.useSignalREffect('Win', (message) => {
+    f7.dialog.alert(message);
+  }, []);
+  SignalRContext.useSignalREffect('Draw', (message) => {
+    f7.dialog.alert(message);
+  }, []);
+  SignalRContext.useSignalREffect('Lose', (message) => {
+    f7.dialog.alert(message);
+  }, []);
+  SignalRContext.useSignalREffect('InvalidMove', () => {
+    f7.dialog.alert('InvalidMove');
+  }, []);
+  SignalRContext.useSignalREffect('DrawOfferReceived', () => {
+      f7.dialog
+        .create({
+          title: 'Opponent offer draw',
+          buttons: [
+            {
+              text: 'Cancel',
+              onClick: rejectDraw,
+            },
+            {
+              text: 'Ok',
+              onClick: acceptDraw,
+            },
+          ],
+        })
+        .open();
+  }, []);
+  function acceptDraw() {
+    SignalRContext.invoke('AcceptDraw');
+  }
+  function rejectDraw() {
+    SignalRContext.invoke('RejectDraw');
+  }
+  SignalRContext.useSignalREffect('DrawOfferRejected', () => {
+    f7.dialog.alert('DrawOfferRejected');
+  }, []);
   SignalRContext.useSignalREffect(
     'MakeMove',
     (from, to) => {
@@ -144,7 +182,7 @@ export function ChessBoard() {
       pendingMove = null;
     }
   }
-
+  
   return (
     <div className="display-flex justify-content-center margin-top">
       <div style={{ width: size }}>
