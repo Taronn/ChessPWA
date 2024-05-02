@@ -3,7 +3,7 @@ import { IInvite } from './types';
 import { useTranslation } from 'react-i18next';
 import { PlayerInfo } from './PlayerInfo';
 import { useSignalR } from '../../hooks/useSignalR';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Colors } from './constants';
 
 export function ReceiveInviteModal() {
@@ -12,6 +12,7 @@ export function ReceiveInviteModal() {
   const [invite, setInvite] = useState<IInvite>({} as IInvite);
   const [opened, setOpened] = useState(false);
 
+  
   // useEffect(() => {
   //   if (invite!==null) {
   //     setOpened(true);
@@ -20,29 +21,27 @@ export function ReceiveInviteModal() {
 
   SignalRContext.useSignalREffect(
     'InviteReceived',
-    newInvite => {
+    (newInvite) => {
       console.log(newInvite);
       setInvite(newInvite);
       setOpened(true);
     },
     [setInvite],
   );
-
-  function rejectInvite() {
-    SignalRContext.invoke('RejectInvite');
-    setOpened(false);
-  }
-
+  
   function acceptInvite() {
     SignalRContext.invoke('AcceptInvite');
+    setOpened(false);
+  }
+  function rejectInvite() {
+    SignalRContext.invoke('RejectInvite',invite);
     setOpened(false);
   }
 
   SignalRContext.useSignalREffect(
     'InviteRejected',
-    newInvite => {
-      console.log('newInvite');
-      console.log(newInvite);
+    () => {
+      f7.dialog.alert(t('Invite Rejected'));
     },
     [],
   );
@@ -78,7 +77,7 @@ export function ReceiveInviteModal() {
             <ListItem title={t('InviteModal.BonusTime')} badge={`${invite?.timerIncrement} ${t('Common.Seconds')}`}>
               <Icon slot="media" material="more_time" />
             </ListItem>
-            <ListItem title={t('Message')} badge={invite?.message}>
+            <ListItem title={t('Common.Message')} badge={invite?.message}>
               <Icon slot="media" material="message" />
             </ListItem>
           </List>
