@@ -58,11 +58,22 @@
   },
   "InviteModal": {
     "InitialTime": "Initial Time",
-    "BonusTime": "Bonus Time"
+    "BonusTime": "Bonus Time",
+    "Invite Rejected":"Invite Rejected"
   },
   "Chess": {
     "Draw": "Draw",
-    "Resign": "Resign"
+    "Resign": "Resign",
+    "Checkmate":"Checkmate",
+    "Resignation":"Resignation",
+    "Draw declaration":"Draw declaration",
+    "Stalemate":"Stalemate",
+    "Fifty move rule":"Fifty move rule",
+    "Insufficient material":"Insufficient material",
+    "Repetition":"Repetition",
+    "InvalidMove":"Invalid Move",
+    "DrawOfferRejected":"Draw Offer Rejected",
+    "Opponent offer draw":"Opponent offer draw"
   },
   "Profile": {
     "Rating": "Rating",

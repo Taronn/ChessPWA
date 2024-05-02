@@ -41,7 +41,7 @@ export function ReceiveInviteModal() {
   SignalRContext.useSignalREffect(
     'InviteRejected',
     () => {
-      f7.dialog.alert('Invite Rejected');
+      f7.dialog.alert(t('Invite Rejected'));
     },
     [],
   );
@@ -77,7 +77,7 @@ export function ReceiveInviteModal() {
             <ListItem title={t('InviteModal.BonusTime')} badge={`${invite?.timerIncrement} ${t('Common.Seconds')}`}>
               <Icon slot="media" material="more_time" />
             </ListItem>
-            <ListItem title={t('Message')} badge={invite?.message}>
+            <ListItem title={t('Common.Message')} badge={invite?.message}>
               <Icon slot="media" material="message" />
             </ListItem>
           </List>

@@ -59,11 +59,22 @@
     },
     "InviteModal": {
         "InitialTime": "Սկզբնական ժամանակ",
-        "BonusTime": "Լրացուցիչ ժամանակ"
+        "BonusTime": "Լրացուցիչ ժամանակ",
+        "Invite Rejected":"Հրավերը մերժված է"
     },
     "Chess": {
         "Draw": "Ոչ-ոքի",
-        "Resign": "Հանձնվել"
+        "Resign": "Հանձնվել",
+        "Checkmate": "Մատ",
+        "Resignation": "Հրաժարական",
+        "Draw declaration": "Ոչ-ոքիի ընդունում",
+        "Stalemate": "Պատ",
+        "Fifty move rule": "Հիսուն քայլի կանոն",
+        "Insufficient material": "Անբավարար խաղաքարեր",
+        "Repetition": "Կրկնություն",
+        "InvalidMove": "Անվավեր քայլ",
+        "DrawOfferRejected": "Ոչ ոքի առաջարկը մերժվեց",
+        "Opponent offer draw":"Հակառակորդը առաջարկում է ոչ-ոքի"
     },
     "Profile": {
         "Rating": "Վարկանիշ",
