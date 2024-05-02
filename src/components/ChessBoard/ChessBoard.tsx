@@ -4,6 +4,7 @@ import { Color, Colors } from '../Shared/constants';
 import { useEffect, useRef, useState } from 'react';
 import { useSignalR } from '../../hooks/useSignalR';
 import { f7 } from 'framework7-react';
+import { useTranslation } from 'react-i18next';
 import { PlayerInfoPanel } from './PlayerInfoPanel';
 import { IGame, IPlayer } from '../Shared/types';
 import { useSelector } from 'react-redux';
@@ -12,7 +13,7 @@ import { selectUser } from '../../redux/slices/userSlice';
 export function ChessBoard() {
   const size = Math.min(window.innerWidth - 45, window.innerHeight - 320);
   const { SignalRContext } = useSignalR();
-
+  const { t } = useTranslation();
   const [game, setGame] = useState<IGame>({} as IGame);
   const user = useSelector(selectUser);
   const [player, setPlayer] = useState<IPlayer>({} as IPlayer);
@@ -42,6 +43,44 @@ export function ChessBoard() {
     [],
   );
 
+  SignalRContext.useSignalREffect('Win', (message) => {
+    f7.dialog.alert(t(`Chess.${message}`));
+  }, []);
+  SignalRContext.useSignalREffect('Draw', (message) => {
+    f7.dialog.alert(t(`Chess.${message}`));
+  }, []);
+  SignalRContext.useSignalREffect('Lose', (message) => {
+    f7.dialog.alert(t(`Chess.${message}`));
+  }, []);
+  SignalRContext.useSignalREffect('InvalidMove', () => {
+    f7.dialog.alert(t('Chess.InvalidMove'));
+  }, []);
+  SignalRContext.useSignalREffect('DrawOfferReceived', () => {
+      f7.dialog
+        .create({
+          title: t('Chess.Opponent offer draw'),
+          buttons: [
+            {
+              text: t('Common.Cancel'),
+              onClick: rejectDraw,
+            },
+            {
+              text: t('Common.Ok'),
+              onClick: acceptDraw,
+            },
+          ],
+        })
+        .open();
+  }, []);
+  function acceptDraw() {
+    SignalRContext.invoke('AcceptDraw');
+  }
+  function rejectDraw() {
+    SignalRContext.invoke('RejectDraw');
+  }
+  SignalRContext.useSignalREffect('DrawOfferRejected', () => {
+    f7.dialog.alert(t('Chess.DrawOfferRejected'));
+  }, []);
   SignalRContext.useSignalREffect(
     'MakeMove',
     (from, to) => {
@@ -144,7 +183,7 @@ export function ChessBoard() {
       pendingMove = null;
     }
   }
-
+  
   return (
     <div className="display-flex justify-content-center margin-top">
       <div style={{ width: size }}>
