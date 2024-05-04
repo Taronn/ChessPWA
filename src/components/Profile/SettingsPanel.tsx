@@ -8,7 +8,7 @@ export function SettingsPanel(){
     localStorage.removeItem('refreshToken');
     localStorage.removeItem('accessToken');
     localStorage.setItem('isLoggedin', 'false');
-    window.location.href = '/login/';
+    window.location.href = '/login';
   }, []);
   return (
     <Panel right reveal swipe swipeOnlyClose id="settings-panel">

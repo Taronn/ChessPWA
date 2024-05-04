@@ -30,7 +30,7 @@ const routes = [
   },
   {
     name: 'auth-success',
-    path: '/auth-success/:accessToken/:refreshToken',
+    path: '/auth-success',
     component: AuthSuccess,
   },
   {
