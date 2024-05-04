@@ -24,7 +24,7 @@ export function Profile({user}:IProfileProps) {
             <h4 className="no-margin">{user.username}</h4>
             <Icon className="margin-left-half" tooltip={countryName} tooltipTrigger="click">
               <img
-                src={`https://flagcdn.com/${user.country}.svg`}
+                src={`https://flagcdn.com/${user?.country || 'am'}.svg`}
                 width="24"
                 alt={user.country}
               />
