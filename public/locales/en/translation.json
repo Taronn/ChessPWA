@@ -84,6 +84,12 @@
     "EditProfile": "Edit Profile",
     "ShareProfile": "Share Profile"
   },
+  "HomePage":{
+    "WelcomeChess":"Welcome to the Chess Game! This is a multiplayer chess game where you can play with your friends and other players around the world.",
+    "WelcomeChess2":"You can also chat with other players and see their profiles.",
+    "WelcomeChess3":"Enjoy the game!",
+    "SocialMedia":"You can also follow us on social media"
+  },
   "Errors": {
     "EMAIL_INVALID": "Please enter a valid email",
     "USERNAME_INVALID": "Username must contain only lowercase, numbers, _, and .",
