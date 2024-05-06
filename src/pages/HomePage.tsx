@@ -10,13 +10,13 @@ export function HomePage() {
       <Block>
         <Button text={t('PlayersList.Play')} href={localStorage.getItem('isLoggedin') === 'true' ? 'players' : 'login'} raised fill />
         <Block strong inset>
-          <p>Welcome to the Chess Game! This is a multiplayer chess game where you can play with your friends and other players around the world.</p>
-          <p>You can also chat with other players and see their profiles.</p>
-          <p>Enjoy the game!</p>
+          <p>{t('HomePage.WelcomeChess')}</p>
+          <p>{t('HomePage.WelcomeChess2')}</p>
+          <p>{t('HomePage.WelcomeChess3')}</p>
         </Block>
 
         <Card>
-          <CardHeader>You can also follow us on social media</CardHeader>
+          <CardHeader>{t('HomePage.SocialMedia')}</CardHeader>
           <CardContent className="display-flex justify-content-space-evenly">
             <Link iconF7="logo_instagram"></Link>
             <Link iconF7="logo_facebook"></Link>
