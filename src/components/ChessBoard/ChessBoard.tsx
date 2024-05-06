@@ -22,7 +22,37 @@ export function ChessBoard() {
   const [chess, setChess] = useState({ game: new Chess() });
   const board = useRef<any>();
   let pendingMove = null;
+  const [sending, setSending] = useState(false); // State to track sending state
+  const [messageText, setMessageText] = useState('');
+  // Function to send a POST request to the API
+  const sendToGeminiAPI = async (message) => {
+      try {
+          setSending(true); // Set sending state to true
+          setMessageText('');
 
+          const response = await fetch('https://chess-gemini.azurewebsites.net/api/chess-gemini?code=QXqNrbk8VEJjAX5LCyFerl8szL_4bK1qDcJ1406s9RC7AzFurelOGQ==', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  "prompt": message
+              }),
+          });
+
+          if (!response.ok) {
+              throw new Error(`API call failed with status: ${response.status}`);
+          }
+          const data = await response.text();
+          return data;
+      } catch (error) {
+          console.error('Error sending message:', error);
+          return null;
+      } finally {
+          setSending(false);
+    }
+  };
+  
   SignalRContext.useSignalREffect(
     'SetGame',
     game => {
@@ -45,6 +75,10 @@ export function ChessBoard() {
 
   SignalRContext.useSignalREffect('Win', (message) => {
     f7.dialog.alert(t(`Chess.${message}`));
+    f7.dialog.confirm('Do you want to analyze the game?', () => {
+      // f7.dialog.alert(sendToGeminiAPI(chess.game.pgn()));
+      console.log(chess.game.loadPgn);
+    });
   }, []);
   SignalRContext.useSignalREffect('Draw', (message) => {
     f7.dialog.alert(t(`Chess.${message}`));
