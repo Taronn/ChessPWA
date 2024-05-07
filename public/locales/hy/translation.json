@@ -74,7 +74,8 @@
         "Repetition": "Կրկնություն",
         "InvalidMove": "Անվավեր քայլ",
         "DrawOfferRejected": "Ոչ ոքի առաջարկը մերժվեց",
-        "Opponent offer draw":"Հակառակորդը առաջարկում է ոչ-ոքի"
+        "Opponent offer draw":"Հակառակորդը առաջարկում է ոչ-ոքի",
+        "AboutTheGame": "Խաղի մասին"
     },
     "Profile": {
         "Rating": "Վարկանիշ",
