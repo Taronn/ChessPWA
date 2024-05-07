@@ -22,7 +22,30 @@ export function ChessBoard() {
   const [chess, setChess] = useState({ game: new Chess() });
   const board = useRef<any>();
   let pendingMove = null;
+  // Function to send a POST request to the API
+  const sendToGeminiAPI = async (message) => {
+      try {
+          const response = await fetch('https://chess-gemini.azurewebsites.net/api/chess-gemini?code=QXqNrbk8VEJjAX5LCyFerl8szL_4bK1qDcJ1406s9RC7AzFurelOGQ==', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                  "prompt": message
+              }),
+          });
 
+          if (!response.ok) {
+              throw new Error(`API call failed with status: ${response.status}`);
+          }
+          const data = await response.text();
+          return data;
+      } catch (error) {
+          console.error('Error sending message:', error);
+          return null;
+      }
+  };
+  
   SignalRContext.useSignalREffect(
     'SetGame',
     game => {
@@ -42,16 +65,41 @@ export function ChessBoard() {
     },
     [],
   );
+  function handleGameOutcome(message) {
+    f7.dialog.alert(t(`Chess.${message}`));
+    f7.dialog.confirm(t(`Chess.AboutTheGame`), async () => {
+      try {
+        const moveHistory = chess.game.history({ verbose: true }); // Get the move history
+        const movesString = moveHistory.map(move => move.san).join(' '); // Convert move history to a single string
 
-  SignalRContext.useSignalREffect('Win', (message) => {
-    f7.dialog.alert(t(`Chess.${message}`));
+        // Call the API and await the response
+        const response = await sendToGeminiAPI(movesString);
+
+        // Handle the API response
+        if (response) {
+          f7.dialog.alert(response);
+        } else {
+          f7.dialog.alert('Failed to analyze the game. Please try again.');
+        }
+      } catch (error) {
+        console.error('Error analyzing the game:', error);
+        f7.dialog.alert('An error occurred while analyzing the game. Please try again.');
+      }
+    });
+  }
+
+  SignalRContext.useSignalREffect('Win', async (message) => {
+    handleGameOutcome(message);
   }, []);
-  SignalRContext.useSignalREffect('Draw', (message) => {
-    f7.dialog.alert(t(`Chess.${message}`));
+
+  SignalRContext.useSignalREffect('Draw', async (message) => {
+    handleGameOutcome(message);
   }, []);
-  SignalRContext.useSignalREffect('Lose', (message) => {
-    f7.dialog.alert(t(`Chess.${message}`));
+
+  SignalRContext.useSignalREffect('Lose', async (message) => {
+    handleGameOutcome(message);
   }, []);
+
   SignalRContext.useSignalREffect('InvalidMove', () => {
     f7.dialog.alert(t('Chess.InvalidMove'));
   }, []);
@@ -112,7 +160,7 @@ export function ChessBoard() {
   useEffect(() => {
     const config = {
       position: chess.game.fen(),
-      orientation: player.color,
+      orientation: 'white', // Set default orientation to white
       touchMove: true,
       appearSpeed: 'slow',
       moveSpeed: 'slow',
@@ -122,13 +170,19 @@ export function ChessBoard() {
       onMousedownSquare,
       onTouchSquare,
     };
+
     if (game?.pgn) {
       chess.game.loadPgn(game.pgn);
       config.position = chess.game.fen();
       setChess({ ...chess });
     }
+
+    if (player.color) {
+      config.orientation = player.color === Color.WHITE ? 'white' : 'black';
+    }
+
     board.current = Chessboard2('chessboard', config);
-  }, [game]);
+  }, [game, player]);
 
   const onTouchSquare = (square, piece, boardInfo) => onMousedownSquare({ square, piece });
 
