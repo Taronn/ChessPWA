@@ -73,7 +73,8 @@
     "Repetition":"Repetition",
     "InvalidMove":"Invalid Move",
     "DrawOfferRejected":"Draw Offer Rejected",
-    "Opponent offer draw":"Opponent offer draw"
+    "Opponent offer draw":"Opponent offer draw",
+    "AboutTheGame":"About the game"
   },
   "Profile": {
     "Rating": "Rating",

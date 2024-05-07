@@ -73,7 +73,8 @@
         "Repetition": "Повторение",
         "InvalidMove": "Неверный ход",
         "DrawOfferRejected":"Предложение о ничья отклонено",
-        "Opponent offer draw":"Оппонент предлагает ничью"
+        "Opponent offer draw":"Оппонент предлагает ничью",
+        "AboutTheGame": "Об игре"
     },
     "Profile": {
         "Rating": "Рейтинг",
