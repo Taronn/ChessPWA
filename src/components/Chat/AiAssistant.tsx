@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import './assistant.css'
 import { useSignalR } from '../../hooks/useSignalR'; // Assuming you have a useSignalR hook
 import {
   Navbar,
@@ -79,7 +80,6 @@ export function AiAssistant() {
 
   // Function to handle sending a message
   const sendMessage = async () => {
-      
     const text = messageText.trim();
 
     if (!text || sending) {
@@ -120,6 +120,12 @@ export function AiAssistant() {
     }
   };
 
+ 
+ const tipIsClicked = async (event) => {      
+      setMessageText(event.target.textContent);
+  }
+
+
   return (
     <Popup className='AiAssistant' swipeToClose>
       <Page>
@@ -129,6 +135,7 @@ export function AiAssistant() {
                     </MessagesTitle>
                     {messagesData.length === 0 && 
                         (
+                        <>
                            <span 
                             style={{
                                 display: 'flex',
@@ -140,8 +147,15 @@ export function AiAssistant() {
                                 width: '100%', 
                             }}
                             >
-                            How can I assist you?
-                        </span>
+                                How can I assist you?
+                            </span>
+                             <div className="container">
+                                <button onClick={tipIsClicked} className="btn relative btn-secondary group w-full whitespace-nowrap rounded-xl  text-left text-token-text-primary md:whitespace-normal" as="button">How to play chess?</button>
+                                <button onClick={tipIsClicked} className="btn relative btn-secondary group w-full whitespace-nowrap rounded-xl  text-left text-token-text-primary md:whitespace-normal" as="button">How to chakemate in 7 steps?</button>
+                                <button onClick={tipIsClicked} className="btn relative btn-secondary group w-full whitespace-nowrap rounded-xl  text-left text-token-text-primary md:whitespace-normal" as="button">How to castle in chess?</button>
+                                <button onClick={tipIsClicked} className="btn relative btn-secondary group w-full whitespace-nowrap rounded-xl  text-left text-token-text-primary md:whitespace-normal" as="button">How can chess benefit someone beyond the game itself?</button>
+                            </div>
+                        </>
                         )
                     }
 
